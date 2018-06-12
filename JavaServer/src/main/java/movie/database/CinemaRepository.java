@@ -1,13 +1,11 @@
 package movie.database;
 
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.repository.CrudRepository;
 
 import movie.entity.Movie;
-
-import java.util.List;
-
-import javax.transaction.Transactional;
 
 @Transactional
 public interface CinemaRepository extends CrudRepository<Movie, Long>{
