@@ -21,7 +21,7 @@ public class MainController {
     @Value("${application.message:Hello World}")
     private String message = "Hello World";
 
-    @GetMapping("/")
+    @GetMapping("/welcome")
     public String welcome(Map<String, Object> model, String query1) {
 
         model.put("time", new Date());
