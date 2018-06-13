@@ -1,3 +1,4 @@
 movie\entity\Ticket.class
 movie\controller\MovieController.class
 movie\entity\Customer.class
+movie\database\ShowRepository.class

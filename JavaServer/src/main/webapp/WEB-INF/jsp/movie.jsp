@@ -17,11 +17,10 @@
 	</head>
 	<body>
 	    <div align="center">
-              <c:forEach items="${listmovies}" var="movie">
+              <c:forEach items="${listshows}" var="show">
                   <tr>
-                    <td>${movie.getId()}</td>
-                    <td>${movie.getTitle()}</td>
-                    <td>${movie.getDescription()}</td>
+                    <td>${show.getMovie()}</td>
+
                   </tr>
                	  </c:forEach>
 
