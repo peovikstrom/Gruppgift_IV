@@ -21,7 +21,8 @@ public class Ticket {
 	@Column(name = "ticket_id", updatable = false, nullable = false)
 	private int id;
 	
-	private int seat;
+	private int seatRow;
+	private int seatCol;
 	
     @ManyToOne()
     @JoinColumn(name = "show_id")
@@ -49,14 +50,21 @@ public class Ticket {
 		this.id = id;
 	}
 
-	public int getSeat() {
-		return seat;
+	public int getSeatRow() {
+		return seatRow;
 	}
 
-	public void setSeat(int seat) {
-		this.seat = seat;
+	public void setSeatRow(int seatRow) {
+		this.seatRow = seatRow;
 	}
 
+	public int getSeatCol() {
+		return seatCol;
+	}
+
+	public void setSeatCol(int seatCol) {
+		this.seatCol = seatCol;
+	}
 	public Show getShow() {
 		return show;
 	}

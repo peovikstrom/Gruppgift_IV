@@ -6,6 +6,7 @@ import java.util.Map;
 
 import movie.database.ShowRepository;
 import movie.entity.Show;
+import movie.entity.Theatre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +38,6 @@ public class MovieController {
         Show show = new Show();
         show.setMovie(movie);
         showRepository.save(show);
-
         List<Movie> movielist = cinemaRepository.findAll();
         model.put("listmovies", cinemaRepository.findAll());
         List<Show> showList = showRepository.findAll();
@@ -47,6 +47,10 @@ public class MovieController {
         return "movie";
     }
 
+    @GetMapping(value = "/index")
+    public String indexPage(Map<String, Object> model) {
+        return "index";
+    }
 
 
 
