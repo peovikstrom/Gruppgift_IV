@@ -47,7 +47,7 @@ public class MovieController {
         return "movie";
     }
 
-    
+
 
 
 /*@Value("${application.message:Hello World}")
