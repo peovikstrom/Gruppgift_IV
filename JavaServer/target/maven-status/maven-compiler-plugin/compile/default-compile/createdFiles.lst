@@ -1,6 +1,3 @@
-test\WebApplication.class
-test\controller\MainController.class
-test\database\DataDAO.class
-test\database\IDataDAO.class
-test\Test.class
-test\database\TestRowMapper.class
+movie\entity\Ticket.class
+movie\controller\MovieController.class
+movie\entity\Customer.class

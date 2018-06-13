@@ -20,17 +20,26 @@ import javax.persistence.Table;
 @Entity(name = "show")
 @Table(name = "show")
 public class Show {
-	@Id
-	//@GeneratedValue(strategy=GenerationType.AUTO)
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "show_id", updatable = false, nullable = false)
-	private int id;
-	
-	private LocalDateTime start;
-	private LocalDateTime stop;
-	
-	private int movie_id;
-	private int theatre_id;
+    @Id
+    //@GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "show_id", updatable = false, nullable = false)
+    private int id;
+
+
+    private LocalDateTime start;
+    private LocalDateTime stop;
+
+    @ManyToOne()
+    @JoinColumn(name = "movie_id")
+    private Movie movie;
+
+    @ManyToOne()
+    @JoinColumn(name = "theatre_id")
+    private Theatre theatre;
+
+    @OneToMany(mappedBy = "show")
+    List<Ticket> tickets = new ArrayList<>();
 /*
     @Override
     public String toString() {
@@ -38,5 +47,38 @@ public class Show {
     			id, start.toString(), stop.toString(), movie_id, theatre_id );
     }
     */
+
+    //getters and setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getStart() {
+        return start;
+    }
+
+    public void setStart(LocalDateTime start) {
+        this.start = start;
+    }
+
+    public LocalDateTime getStop() {
+        return stop;
+    }
+
+    public void setStop(LocalDateTime stop) {
+        this.stop = stop;
+    }
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
 }
 

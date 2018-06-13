@@ -11,6 +11,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "movie")
 public class Movie {
+
+
 	@Id
 	//@GeneratedValue(strategy=GenerationType.AUTO)
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -22,7 +24,31 @@ public class Movie {
 	
     @Override
     public String toString() {
-    	return String.format("Book[id:%d, title:%s, desc:%s",id, title, description);
+    	return String.format("Movie[id:%d, title:%s, desc:%s",id, title, description);
     }
-	
+
+    // getters and setters
+    public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 }
