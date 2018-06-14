@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import movie.database.CinemaRepository;
+import movie.database.MovieRepository;
 import movie.database.ShowRepository;
 import movie.database.TheatreRepository;
 import movie.entity.Movie;
@@ -19,7 +19,7 @@ import movie.entity.Theatre;
 public class MovieController {
 
     @Autowired
-    private CinemaRepository cinemaRepository;
+    private MovieRepository movieRepository;
 
     @Autowired
     private ShowRepository showRepository;
@@ -32,12 +32,12 @@ public class MovieController {
         Movie movie = new Movie();
         movie.setTitle("My Little Pony");
         movie.setDescription("Friendship is magic");
-        cinemaRepository.save(movie);
+        movieRepository.save(movie);
         Show show = new Show();
         show.setMovie(movie);
         showRepository.save(show);
-        List<Movie> movielist = cinemaRepository.findAll();
-        model.put("listmovies", cinemaRepository.findAll());
+        List<Movie> movielist = movieRepository.findAll();
+        model.put("listmovies", movieRepository.findAll());
         List<Show> showList = showRepository.findAll();
         model.put("listshows", showRepository.findAll());
         System.out.println(movielist);
