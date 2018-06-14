@@ -16,10 +16,11 @@
         <div class="nav">
                 <ul>
                     <li><a href="index.html">Hemsida</a></li>
-                    <li><a href="Salong.html">Salong 1</a></li>
-                    <li><a href="Salong.html">Salong 2</a></li>
-                    <li><a href="Salong.html">Salong 3</a></li>
-                    <li><a href="Salong.html">Salong 4</a></li>
+                    
+					<c:forEach items="${theatres}" var="theatre">
+						<li><a href="bleh.html">${theatre.getName()}></a></li>
+					</c:forEach>
+                    
                 </ul>
         </div>
         <div class="main">

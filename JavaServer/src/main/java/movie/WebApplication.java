@@ -1,8 +1,5 @@
 package movie;
 
-import movie.database.CinemaRepository;
-import movie.entity.Movie;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

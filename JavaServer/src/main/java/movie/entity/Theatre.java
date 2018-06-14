@@ -25,7 +25,7 @@ public class Theatre {
 	
     @Override
     public String toString() {
-    	return String.format("Book[id:%d, name:%s, row:%d, col:%d",id, name, row, col);
+    	return String.format("Theatre[id:%d, name:%s, row:%d, col:%d",id, name, row, col);
     }
 
 	//getters and setters

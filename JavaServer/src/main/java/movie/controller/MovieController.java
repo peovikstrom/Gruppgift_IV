@@ -1,23 +1,18 @@
 package movie.controller;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import movie.database.ShowRepository;
-import movie.entity.Show;
-import movie.entity.Theatre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import movie.database.CinemaRepository;
+import movie.database.ShowRepository;
+import movie.database.TheatreRepository;
 import movie.entity.Movie;
+import movie.entity.Show;
+import movie.entity.Theatre;
 
 
 @Controller
@@ -28,6 +23,9 @@ public class MovieController {
 
     @Autowired
     private ShowRepository showRepository;
+    
+    @Autowired
+    private TheatreRepository theatreRepository;
 
     @GetMapping(value = "/movie")
     public String rootPage(Map<String, Object> model) {
@@ -49,6 +47,8 @@ public class MovieController {
 
     @GetMapping(value = "/index")
     public String indexPage(Map<String, Object> model) {
+    	List<Theatre> theatres = theatreRepository.findAll();
+    	model.put("theatres",theatres);
         return "index";
     }
 

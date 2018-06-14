@@ -2,7 +2,6 @@ package movie.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,7 +23,8 @@ public class Ticket {
 	private int seatRow;
 	private int seatCol;
 	
-    @ManyToOne()
+	@ManyToOne()
+    //@ManyToOne()
     @JoinColumn(name = "show_id")
 	private Show show;
 

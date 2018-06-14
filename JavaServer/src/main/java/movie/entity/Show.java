@@ -4,10 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,7 +37,10 @@ public class Show {
     private Theatre theatre;
 
     @OneToMany(mappedBy = "show")
-    List<Ticket> tickets = new ArrayList<>();
+//    @OneToMany()
+//    @JoinColumn(name = "ticket_id")
+    private List<Ticket> tickets = new ArrayList<>();
+    
 /*
     @Override
     public String toString() {
@@ -48,7 +49,23 @@ public class Show {
     }
     */
 
-    //getters and setters
+    public Theatre getTheatre() {
+		return theatre;
+	}
+
+	public void setTheatre(Theatre theatre) {
+		this.theatre = theatre;
+	}
+
+	public List<Ticket> getTickets() {
+		return tickets;
+	}
+
+	public void setTickets(List<Ticket> tickets) {
+		this.tickets = tickets;
+	}
+
+	//getters and setters
     public int getId() {
         return id;
     }

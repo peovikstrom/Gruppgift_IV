@@ -1,2 +1,5 @@
 /java.servlet.iml
-/target/**
+/target
+
+*.class
+*.jar
