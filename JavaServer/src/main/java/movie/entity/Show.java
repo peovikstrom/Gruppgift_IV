@@ -1,6 +1,7 @@
 package movie.entity;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,6 @@ public class Show {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "show_id", updatable = false, nullable = false)
     private int id;
-
 
     private LocalDateTime start;
     private LocalDateTime stop;
@@ -74,16 +74,18 @@ public class Show {
         this.id = id;
     }
 
-    public LocalDateTime getStart() {
-        return start;
+    public String getStart() {
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return this.start.format(formatter);
     }
 
     public void setStart(LocalDateTime start) {
         this.start = start;
     }
 
-    public LocalDateTime getStop() {
-        return stop;
+    public String getStop() {
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return this.stop.format(formatter);
     }
 
     public void setStop(LocalDateTime stop) {

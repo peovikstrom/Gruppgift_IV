@@ -1,13 +1,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="spring-form" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
 <head>
 <title>Biograf AB</title>
-<link rel="stylesheet" type="text/css" href="style.css" />
+<link rel="stylesheet" type="text/css" href="/style.css" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -18,106 +19,41 @@
 	<div class="container">
 		<div class="nav">
 			<ul>
-				<li><a href="index.html">Hemsida</a></li>
-
+				<li><a href="/index">Hemsida</a></li>
 				<c:forEach items="${theatres}" var="theatre">
-					<li><a href="bleh.html">${theatre.getName()}></a></li>
+					<li><a href="/index/${theatre.getId()}">${theatre.getName()}</a></li>
 				</c:forEach>
-
+				<li><a href="/addMovie">Ny film</a>
 			</ul>
 		</div>
 		<div class="main">
-			<div class="movie">
-				<div class="poster">
-					<img src = "img/terminator.jpg"/>
-				</div>
-				<div class="labelText">
-					<div class="label">The Terminator</div>
-					<div class="text">A seemingly indestructible android is sent
-						from 2029 to 1984 to assassinate a waitress, whose unborn son will
-						lead humanity in a war against the machines, while a soldier from
-						that war is sent to protect her at all costs.</div>
-					<br />
-					<div class="text">2018-01-01 12:00 - 2018-01-01 14:00</div>
-				</div>
-				<div class="book">
-				
-					<form type="seats">
-						Antal platser<input type="seats"><br>
-					</form>
+			
+			<c:forEach items="${shows}" var="show">	
+			
+				<div class="movie">
+					<div class="poster">
+						<img src = "${show.getMovie().getUriPoster()}"/>
+					</div>
+					<div class="labelText">
+						<div class="label">${show.getMovie().getTitle()}</div>
+						<div class="text">${show.getMovie().getDescription()}</div>
+						<br />
+						<div class="text">${show.getStart()} - ${show.getStop()}</div>
+					</div>
+					<div class="book">
 					
-					<button type="button">Boka</button>
-					<div class="text">Lediga platser: #</div>
-					<div class="text">Pris: 120kr</div>
+						<form action="foo" method="post">
+							Antal platser
+							<input type="text" name="seats" value="1"><br>
+							<button name="movie" value="${show.getMovie().getId()}">Boka</button>
+							<div class="text">Lediga platser: #</div>
+							<div class="text">Pris: 120kr</div>
+						
+						</form>
+						
+					</div>
 				</div>
-			</div>
-			
-			
-			
-			
-			<div class="movie">
-				<div class="poster">
-					<img src="img/scarface.jpg" />
-				</div>
-				<div class="labelText">
-					<div class="label">Scarface</div>
-					<div class="text">In Miami in 1980, a determined Cuban
-						immigrant takes over a drug cartel and succumbs to greed.</div>
-					<br />
-					<div class="text">2018-01-01 12:00 - 2018-01-01 14:00</div>
-				</div>
-				<div class="book">
-					<form type="seats">
-						Antal platser<input type="seats"><br>
-					</form>
-					<button type="button">Boka</button>
-					<div class="text">Lediga platser: #</div>
-					<div class="text">Pris: 120kr</div>
-				</div>
-			</div>
-			<div class="movie">
-				<div class="poster">
-					<img src="img/hittaNemo.jpg" />
-				</div>
-				<div class="labelText">
-					<div class="label">Hitta Nemo</div>
-					<div class="text">After his son is captured in the Great
-						Barrier Reef and taken to Sydney, a timid clownfish sets out on a
-						journey to bring him home.</div>
-					<br />
-					<div class="text">2018-01-01 12:00 - 2018-01-01 14:00</div>
-				</div>
-				<div class="book">
-					<form type="seats">
-						Antal platser<input type="seats"><br>
-					</form>
-					<button type="button">Boka</button>
-					<div class="text">Lediga platser: #</div>
-					<div class="text">Pris: 120kr</div>
-				</div>
-			</div>
-			<div class="movie">
-				<div class="poster">
-					<img src="img/tarzan.jpg" />
-				</div>
-				<div class="labelText">
-					<div class="label">The Legend of Tarzan</div>
-					<div class="text">Tarzan, having acclimated to life in
-						London, is called back to his former home in the jungle to
-						investigate the activities at a mining encampment.</div>
-					<br />
-					<div class="text">2018-01-01 12:00 - 2018-01-01 14:00</div>
-				</div>
-				<div class="book">
-					<form type="seats">
-						Antal platser<input type="seats"><br>
-					</form>
-					<button type="button">Boka</button>
-					<div class="text">Lediga platser: #</div>
-					<div class="text">Pris: 120kr</div>
-				</div>
-			</div>
-
+			</c:forEach>
 		</div>
 	</div>
 </body>

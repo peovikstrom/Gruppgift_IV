@@ -6,7 +6,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -23,10 +26,17 @@ public class MainController {
         return "welcome";
     }
 
-    @RequestMapping("/foo")
-    public String foo(Map<String, Object> model) {
+    @PostMapping("/foo")
+    public String foo(Map<String, Object> model,
+    		@RequestParam("seats") String nrSeats,
+    		@RequestParam("movie") String movieId) {
+    	
     	String result = "FOO";
         model.put("message", result);
+        
+        System.out.println("Seats: "+nrSeats);
+        System.out.println("Movie ID:"+movieId);
+
         return "welcome";
     }
 

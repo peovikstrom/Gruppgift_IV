@@ -22,7 +22,17 @@ public class Movie {
 	private String title;
 	private String description;
 	
-    @Override
+	private String uriPoster;
+	
+    public String getUriPoster() {
+		return uriPoster;
+	}
+
+	public void setUriPoster(String uriPoster) {
+		this.uriPoster = uriPoster;
+	}
+
+	@Override
     public String toString() {
     	return String.format("Movie[id:%d, title:%s, desc:%s",id, title, description);
     }
