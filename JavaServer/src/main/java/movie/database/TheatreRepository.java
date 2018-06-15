@@ -14,7 +14,7 @@ import movie.entity.Theatre;
 @Transactional
 public interface TheatreRepository extends CrudRepository<Theatre, Long>{
     public void deleteById(int id);
-    public Show findById(int id);
+    public Theatre findById(int id);
     //public List<Book> findByTitle(String title);
     public List<Theatre> findAll();
 }

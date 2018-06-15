@@ -17,7 +17,13 @@
 		<h1>Biograf AB</h1>
 	</div>
 	<div class="container">
-	
+		<div class="nav">
+			<ul>
+				<li><a href="/index">Hemsida</a></li>
+				<li><a href="/addMovie">Ny film</a>
+				<li><a href="/addShow">Ny Show</a>
+			</ul>
+		</div>
 		<div class="main">
 							
 				<form action="addMoviePost" method="post">

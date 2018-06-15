@@ -1,7 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="spring-form" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="spring-form"
+	uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -24,33 +25,42 @@
 					<li><a href="/index/${theatre.getId()}">${theatre.getName()}</a></li>
 				</c:forEach>
 				<li><a href="/addMovie">Ny film</a>
+				<li><a href="/addShow">Ny Show</a>
 			</ul>
 		</div>
 		<div class="main">
-			
-			<c:forEach items="${shows}" var="show">	
-			
+			${shows}
+			<c:forEach items="${shows}" var="show">
+
 				<div class="movie">
 					<div class="poster">
-						<img src = "${show.getMovie().getUriPoster()}"/>
+						<img src="${show.getMovie().getUriPoster()}" />
 					</div>
 					<div class="labelText">
 						<div class="label">${show.getMovie().getTitle()}</div>
 						<div class="text">${show.getMovie().getDescription()}</div>
 						<br />
-						<div class="text">${show.getStart()} - ${show.getStop()}</div>
+						<div class="text">${show.getStart()}- ${show.getStop()}</div>
 					</div>
 					<div class="book">
-					
+
 						<form action="foo" method="post">
-							Antal platser
-							<input type="text" name="seats" value="1"><br>
+							Antal platser <input type="text" name="seats" value="1"><br>
 							<button name="movie" value="${show.getMovie().getId()}">Boka</button>
 							<div class="text">Lediga platser: #</div>
 							<div class="text">Pris: 120kr</div>
-						
+							<c:choose>
+								<c:when test="${param.enter=='1'}">
+        							pizza. 
+        							<br />
+								</c:when>
+								<c:otherwise>
+        							pizzas. 
+        							<br />
+								</c:otherwise>
+							</c:choose>
 						</form>
-						
+
 					</div>
 				</div>
 			</c:forEach>

@@ -1,8 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="spring-form"
-	uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="spring-form" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -21,56 +20,16 @@
 		<div class="nav">
 			<ul>
 				<li><a href="/index">Hemsida</a></li>
+				<c:forEach items="${theatres}" var="theatre">
+					<li><a href="/index/${theatre.getId()}">${theatre.getName()}</a></li>
+				</c:forEach>
 				<li><a href="/addMovie">Ny film</a>
 				<li><a href="/addShow">Ny Show</a>
 			</ul>
 		</div>
 		<div class="main">
-
-			<form action="addShowPost" method="post">
-				<input type="text" name="movieId" placeholder="Movie ID"><br>
-				<input type="text" name="TheatreID" placeholder="Theatre ID"><br>
-				<input type="text" name="start" placeholder="Show Start"><br>
-				<input type="text" name="stop" placeholder="Show End"><br>
-				<button name="movie">Lägg till show</button>
-
-			</form>
-
-			<table>
-				<tr>
-					<th>Movie</th>
-					<th>Id</th>
-				</tr>
-				<c:forEach items="${movies}" var="movie">
-					<tr>
-						<td>${ movie.getTitle() }</td>
-						<td>${ movie.getId() }</td>
-					</tr>
-				</c:forEach>
-			</table>
-
-
-			<table>
-				<tr>
-					<th>Show</th>
-					<th>Id</th>
-					<th>Start</th>
-					<th>End</th>
-				</tr>
-				<c:forEach items="${shows}" var="show">
-					<tr>
-						<td>${ show.getMovie().getTitle() }</td>
-						<td>${ show.getId() }</td>
-						<td>${ show.getStart() }</td>
-						<td>${ show.getStop() }</td>
-						<td><a href = "" style ="color: white; text-decoration: none;">Erase Show</a></td>
-						
-					</tr>
-				</c:forEach>
-			</table>
-
-
-
+			YOU DID SOMETHING VERY WRONG
+			
 		</div>
 	</div>
 </body>
