@@ -25,80 +25,24 @@
 				<li><a href="/addShow">Ny Show</a>
 			</ul>
 		</div>
-
 		<div class="main">
-
-			
-			
-				<div class="movie">
-					<div class="poster">
-						<img src="${show.getMovie().getUriPoster()}" />
-					</div>
-					<div class="labelText">
-						
-					</div>
-					<div class="book">
-
-						<form action="booking" method="post">
-							Antal platser <input type="text" name="seats" value="1"><br>
-							<button name="movie" value="${show.getMovie().getId()}">Boka</button>
-							<div class="text">Lediga platser: #</div>
-							<div class="text">Pris: 120kr</div>
-
-						</form>
-
-					</div>
-				</div>
-			
-		</div>
-
-		<div class="main">
-
+            <div class="movie">
+                <div class="poster">
+                    <img src="${show.getMovie().getUriPoster()}" />
+                </div>
+                <div class="labelText">
+                    <div class="label">${show.getMovie().getTitle()}</div>
+                    <div class="text">${show.getMovie().getDescription()}</div>
+                    <br />
+                    <div class="text">${show.getStart()} - ${show.getStop()}</div>
+            </div>
 			<form action="addShowPost" method="post">
 				<input type="text" name="movieId" placeholder="Movie ID"><br>
 				<input type="text" name="TheatreID" placeholder="Theatre ID"><br>
 				<input type="text" name="start" placeholder="Show Start"><br>
 				<input type="text" name="stop" placeholder="Show End"><br>
-				<button name="movie">Lägg till show</button>
-
+				<a href="/index/${show.getId()}">Lägg till show</a>
 			</form>
-
-			<table>
-				<tr>
-					<th>Movie</th>
-					<th>Id</th>
-				</tr>
-				<c:forEach items="${movies}" var="movie">
-					<tr>
-						<td>${ movie.getTitle() }</td>
-						<td>${ movie.getId() }</td>
-					</tr>
-				</c:forEach>
-			</table>
-
-
-			<table>
-				<tr>
-					<th>Show</th>
-					<th>Id</th>
-					<th>Start</th>
-					<th>End</th>
-				</tr>
-				<c:forEach items="${shows}" var="show">
-					<tr>
-						<td>${ show.getMovie().getTitle() }</td>
-						<td>${ show.getId() }</td>
-						<td>${ show.getStart() }</td>
-						<td>${ show.getStop() }</td>
-						<td><a href="" style="color: white; text-decoration: none;">Erase
-								Show</a></td>
-
-					</tr>
-				</c:forEach>
-			</table>
-
-
-
 		</div>
 	</div>
 </body>
