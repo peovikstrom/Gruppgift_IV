@@ -105,6 +105,19 @@ public class MovieController {
 
 		return "addShow";
 	}
+	
+	@GetMapping(value = "/booking")
+	public String bookingPage(Map<String, Object> model) {
+
+		List<Movie> movies = movieRepository.findAll();
+		List<Show> shows = showRepository.findAll();
+
+		model.put("movies", movies);
+		model.put("shows", shows);
+
+		return "booking";
+	}
+
 
 	/*
 	 * <form action="addShowPost" method="post"> <input type="text" name="movieId"

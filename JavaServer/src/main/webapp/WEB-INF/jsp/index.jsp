@@ -29,7 +29,7 @@
 			</ul>
 		</div>
 		<div class="main">
-			${shows}
+			
 			<c:forEach items="${shows}" var="show">
 
 				<div class="movie">
@@ -44,21 +44,12 @@
 					</div>
 					<div class="book">
 
-						<form action="foo" method="post">
+						<form action="booking" method="post">
 							Antal platser <input type="text" name="seats" value="1"><br>
 							<button name="movie" value="${show.getMovie().getId()}">Boka</button>
 							<div class="text">Lediga platser: #</div>
 							<div class="text">Pris: 120kr</div>
-							<c:choose>
-								<c:when test="${param.enter=='1'}">
-        							pizza. 
-        							<br />
-								</c:when>
-								<c:otherwise>
-        							pizzas. 
-        							<br />
-								</c:otherwise>
-							</c:choose>
+							
 						</form>
 
 					</div>
