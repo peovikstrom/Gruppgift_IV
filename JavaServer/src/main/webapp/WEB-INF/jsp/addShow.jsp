@@ -62,8 +62,7 @@
 						<td>${ show.getMovie().getTitle() }</td>
 						<td>${ show.getId() }</td>
 						<td>${ show.getStart() }</td>
-						<td>${ show.getStop() }</td>
-						<td><a href = "" style ="color: white; text-decoration: none;">Erase Show</a></td>
+						<td>${ show.getStop() }</td>					
 						
 					</tr>
 				</c:forEach>

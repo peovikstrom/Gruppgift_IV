@@ -31,43 +31,44 @@
 					<img src="${show.getMovie().getUriPoster()}" />
 				</div>
 				<div class="labelText">
-					<div class="label">${show.getMovie().getTitle()}</div>
-					<div class="text">${show.getMovie().getDescription()}</div>
-					<br />
-					<div class="text">${show.getStart()}-${show.getStop()}</div>
+
+
+					<div class="seats">
+						<table>
+
+							<c:forEach begin="0" end="9" var="i">
+								<tr>
+									<c:forEach begin="0" end="9" var="j">
+
+										<c:choose>
+											<c:when test="${seats[i][j] != 0 }">
+												<td><a href="/bookingRemove/${show.getId()}/${i}/${j}">
+												<img src="/img/red.jpg">
+												</a>
+												<td />
+											</c:when>
+											<c:otherwise>
+												<td><a href="/bookingBook/${show.getId()}/${i}/${j}">
+												 <img src="/img/green.jpg">
+												</a>
+												<td />
+											</c:otherwise>
+										</c:choose>
+
+									</c:forEach>
+								<tr />
+							</c:forEach>
+						</table>
+					</div>
 				</div>
 				<%--
-			<form action="addShowPost" method="post">
-				<input type="text" name="movieId" placeholder="Movie ID"><br>
-				<input type="text" name="TheatreID" placeholder="Theatre ID"><br>
-				<input type="text" name="start" placeholder="Show Start"><br>
-				<input type="text" name="stop" placeholder="Show End"><br>
-				<a href="/index/${show.getId()}">Lägg till show</a>
-			</form>
-			
 			${i}:${j}:${seats[i][j]}
 			
 			 --%>
 
-				<<-- SEAT BOOKING -->>
-				<c:forEach begin="0" end="9" var="i">
-					<c:forEach begin="0" end="9" var="j">
-					
-						<c:choose>
-							<c:when test="${seats[i][j] != 0 }">
-							X
-						</c:when>
-							<c:otherwise>
-							O
-						</c:otherwise>
-						</c:choose>
-						
-					</c:forEach>
-					<br>
-				</c:forEach>
-
 			</div>
 		</div>
+	</div>
 </body>
 
 <div class="footer">

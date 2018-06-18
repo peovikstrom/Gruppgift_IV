@@ -181,7 +181,40 @@ public class MovieController {
 		showRepository.save(show);
 		return "redirect:addShow";
 	}
-
+	
+	@GetMapping(value = "/bookingBook/{showId}/{seatRow}/{seatCol}")
+	public String bookSeatPage(Map<String, Object> model, @PathVariable int showId,
+			@PathVariable int seatRow, @PathVariable int seatCol) {
+		
+		Show show = showRepository.findById(showId);
+		
+		Ticket ticket = new Ticket();
+		ticket.setSeatCol(seatCol);
+		ticket.setSeatRow(seatRow);
+		ticket.setShow(show);
+		
+		ticketRepository.save(ticket);
+		
+		return "redirect:/booking/" + showId;
+	}
+	
+	@GetMapping(value = "/bookingRemove/{showId}/{seatRow}/{seatCol}")
+	public String unBookSeatPage(Map<String, Object> model, @PathVariable int showId,
+			@PathVariable int seatRow, @PathVariable int seatCol) {
+		
+		List<Ticket> tickets = ticketRepository.findAll();
+		
+		List<Ticket> showTickets = tickets.stream().
+				filter(b -> b.getShow().getId() == showId).
+				filter(r -> r.getSeatRow() == seatRow).
+				filter(c -> c.getSeatCol() == seatCol).
+				collect(Collectors.toList());
+		if(showTickets.size() != 1) {
+			System.err.println(showTickets);
+		}
+		ticketRepository.delete(showTickets.get(0));
+		return "redirect:/booking/" + showId;
+	}
 	/*
 	 * @Value("${application.message:Hello World}") private String message =
 	 * "Hello World";

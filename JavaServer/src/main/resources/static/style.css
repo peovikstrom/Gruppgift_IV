@@ -86,7 +86,15 @@ body {
     display: flex;
     flex-direction: column;
     padding: 10px;
+}
 
+seats {
+	padding: 10px;
+}
+
+.seats img{
+	width: 20px;
+	height: 20px;
 }
 
 .label {

@@ -44,12 +44,8 @@
 					</div>
 					<div class="book">
 
-						<form action="booking" method="post">
-							Antal platser <input type="text" name="seats"></br>
-							Startplats <input type="text" name="seats"></br>
-							Namn <input type="text" name="seats">
+						<form action="booking" method="post">						
 							<a href="/booking/${show.getId()}">Boka</a>
-							<div class="text">Lediga platser: #</div>
 							<div class="text">Pris: 120kr</div>
 							
 						</form>
