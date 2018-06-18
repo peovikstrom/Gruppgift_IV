@@ -26,16 +26,17 @@
 			</ul>
 		</div>
 		<div class="main">
-            <div class="movie">
-                <div class="poster">
-                    <img src="${show.getMovie().getUriPoster()}" />
-                </div>
-                <div class="labelText">
-                    <div class="label">${show.getMovie().getTitle()}</div>
-                    <div class="text">${show.getMovie().getDescription()}</div>
-                    <br />
-                    <div class="text">${show.getStart()} - ${show.getStop()}</div>
-            </div>
+			<div class="movie">
+				<div class="poster">
+					<img src="${show.getMovie().getUriPoster()}" />
+				</div>
+				<div class="labelText">
+					<div class="label">${show.getMovie().getTitle()}</div>
+					<div class="text">${show.getMovie().getDescription()}</div>
+					<br />
+					<div class="text">${show.getStart()}-${show.getStop()}</div>
+				</div>
+				<%--
 			<form action="addShowPost" method="post">
 				<input type="text" name="movieId" placeholder="Movie ID"><br>
 				<input type="text" name="TheatreID" placeholder="Theatre ID"><br>
@@ -43,9 +44,32 @@
 				<input type="text" name="stop" placeholder="Show End"><br>
 				<a href="/index/${show.getId()}">Lägg till show</a>
 			</form>
+			
+			${i}:${j}:${seats[i][j]}
+			
+			 --%>
+
+				<<-- SEAT BOOKING -->>
+				<c:forEach begin="0" end="9" var="i">
+					<c:forEach begin="0" end="9" var="j">
+					
+						<c:choose>
+							<c:when test="${seats[i][j] != 0 }">
+							X
+						</c:when>
+							<c:otherwise>
+							O
+						</c:otherwise>
+						</c:choose>
+						
+					</c:forEach>
+					<br>
+				</c:forEach>
+
+			</div>
 		</div>
-	</div>
 </body>
+
 <div class="footer">
 	<div>Webmaster: Karl-Gustav, Jesper, Tommy</div>
 	<div>Copyright &copy; 2018 Biograf AB</div>

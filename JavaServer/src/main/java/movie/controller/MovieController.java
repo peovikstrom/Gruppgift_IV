@@ -1,6 +1,5 @@
 package movie.controller;
 
-
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -15,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import movie.database.MovieRepository;
 import movie.database.ShowRepository;
 import movie.database.TheatreRepository;
+import movie.database.TicketRepository;
 import movie.entity.Movie;
 import movie.entity.Show;
 import movie.entity.Theatre;
+import movie.entity.Ticket;
 import movie.exception.ShowCheckException;
 
 @Controller
@@ -31,6 +32,9 @@ public class MovieController {
 
 	@Autowired
 	private TheatreRepository theatreRepository;
+
+	@Autowired
+	private TicketRepository ticketRepository;
 
 	@GetMapping(value = "/index")
 	public String indexPage(Map<String, Object> model) {
@@ -50,7 +54,6 @@ public class MovieController {
 	@GetMapping(value = "/index/{id}")
 	public String indexPage(Map<String, Object> model, @PathVariable int id) {
 
-		List<Theatre> theatres = theatreRepository.findAll();
 		List<Movie> movies = movieRepository.findAll();
 		List<Show> shows = showRepository.findAll();
 
@@ -105,15 +108,39 @@ public class MovieController {
 		return "addShow";
 	}
 
-	/*
-	 * <form action="addShowPost" method="post"> <input type="text" name="movieId"
-	 * placeholder="Movie ID"><br> <input type="text" name="TheatreID"
-	 * placeholder="Theatre ID"><br> <input type="text" name="url"
-	 * placeholder="Poster Link"><br> <input type="text" name="start"
-	 * placeholder="Show Start"><br> <input type="text" name="stop"
-	 * placeholder="Show End"><br> <button name="movie">Lägg till show</button>
-	 * 
-	 */
+	@GetMapping(value = "/booking/{showId}")
+	public String bookingPage(Map<String, Object> model, @PathVariable int showId) {
+
+		List<Movie> movies = movieRepository.findAll();
+		Show show = showRepository.findById(showId);
+
+		List<Ticket> tickets = ticketRepository.findAll();
+
+		List<Ticket> showTickets = tickets.stream().
+				filter(b -> b.getShow().getId() == showId)
+				.collect(Collectors.toList());
+
+		Integer[][] seats = new Integer[10][10];
+
+		// seats[0][0]=0;
+
+		for (int col = 0; col < 10; col++) {
+			for (int row = 0; row < 10; row++)
+				seats[col][row] = 0;
+		}
+
+		for (Ticket t : showTickets) {
+			seats[t.getSeatRow()][t.getSeatCol()] = new Integer(t.getId());
+			System.out.println(t);
+		}
+
+		model.put("seats", seats);
+		model.put("movies", movies);
+		model.put("show", show);
+		System.out.println(show);
+
+		return "booking";
+	}
 
 	@PostMapping(value = "/addShowPost")
 	public String addShowPagePost(Map<String, Object> model, @RequestParam("movieId") String movieId,

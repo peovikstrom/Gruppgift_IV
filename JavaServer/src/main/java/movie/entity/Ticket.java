@@ -34,12 +34,10 @@ public class Ticket {
 	private Customer customer;
 
 
-	/*
     @Override
     public String toString() {
-    	return String.format("Book[id:%d, title:%s, desc:%s",id, title, description);
+    	return String.format("Ticket[id:%d, col:%d, row:%d",id, seatCol, seatRow);
     }
-    */
 
 	//getters and setters
 	public int getId() {

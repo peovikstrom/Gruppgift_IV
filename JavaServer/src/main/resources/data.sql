@@ -1,8 +1,8 @@
 INSERT INTO theatre (name, row, col) VALUES
 ('Salong 1', '10','10'),
-('Salong 2', '20', '20'),
-('Salong 3', '30', '30'),
-('Salong 4', '40', '40');
+('Salong 2', '10', '10'),
+('Salong 3', '10', '10'),
+('Salong 4', '10', '10');
 
 INSERT INTO movie (title, description, uri_poster) VALUES
 ('Scarface', 'In Miami in 1980, a determined Cuban immigrant takes over a drug cartel and succumbs to greed.','/img/scarface.jpg'),
