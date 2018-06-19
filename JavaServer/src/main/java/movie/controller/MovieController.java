@@ -122,20 +122,19 @@ public class MovieController {
 		model.put("seats", seats);
 		model.put("movies", movies);
 		model.put("show", show);
-		
+
 		model.put("multi", this.globalSeats);
-		
+
 		System.out.println(show);
 
 		return "booking";
 	}
 
 	private Integer[][] ticket2SeatMatrix(int showId) {
-		
+
 		List<Ticket> tickets = ticketRepository.findAll();
 
-		List<Ticket> showTickets = tickets.stream().
-				filter(b -> b.getShow().getId() == showId)
+		List<Ticket> showTickets = tickets.stream().filter(b -> b.getShow().getId() == showId)
 				.collect(Collectors.toList());
 
 		Integer[][] seats = new Integer[10][10];
@@ -159,7 +158,7 @@ public class MovieController {
 
 		List<Movie> movies = movieRepository.findAll();
 		List<Show> shows = showRepository.findAll();
-		List<Theatre> theatres = theatreRepository.findAll();
+		
 		Show show;
 		try {
 
@@ -173,22 +172,15 @@ public class MovieController {
 			if (theatre == null) {
 				System.out.println(theatreIdInt);
 			}
-			
-			List<Theatre> showOverlaps = theatres.stream().
-					filter(b -> b.getId() == theatreIdInt)
-					.collect(Collectors.toList());
-			
+
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    		
-//			for(Theatre t : showOverlaps) {
-//				LocalDateTime startDateTime = LocalDateTime.parse(start, formatter);
-//				LocalDateTime stopDateTime = LocalDateTime.parse(stop, formatter);
-//				
-//				if(checkIfDatetimeOverlaps(startDateTime, stopDateTime)) {
-//					return "addShowError";
-//				}
-//			}
-			
+
+			LocalDateTime startDateTime = LocalDateTime.parse(start, formatter);
+			LocalDateTime stopDateTime = LocalDateTime.parse(stop, formatter);
+
+			if (checkIfDatetimeOverlaps(startDateTime, stopDateTime, theatreIdInt)) {
+				return "addShowError";
+			}
 
 			model.put("movies", movies);
 			model.put("shows", shows);
@@ -208,15 +200,15 @@ public class MovieController {
 		showRepository.save(show);
 		return "redirect:addShow";
 	}
-	
-	
+
 	private int globalSeats = 1;
-	
+
 	@PostMapping(value = "/bookingBook/seats/{showId}")
-	public String setSeats(Map<String, Object> model, @RequestParam("seatCount") String countStr, @PathVariable int showId) {
+	public String setSeats(Map<String, Object> model, @RequestParam("seatCount") String countStr,
+			@PathVariable int showId) {
 
 		int count = 0;
-		
+
 		try {
 			count = Integer.parseInt(countStr);
 			this.globalSeats = count;
@@ -224,47 +216,45 @@ public class MovieController {
 			this.globalSeats = 1;
 			System.err.println(e);
 		}
-		
+
 		return "redirect:/booking/" + showId;
 	}
-	
+
 	@GetMapping(value = "/bookingBook/{showId}/{seatRow}/{seatCol}")
-	public String bookSeatPageMultiple(Map<String, Object> model, @PathVariable int showId,
-			@PathVariable int seatRow, @PathVariable int seatCol) {
-		
+	public String bookSeatPageMultiple(Map<String, Object> model, @PathVariable int showId, @PathVariable int seatRow,
+			@PathVariable int seatCol) {
 
 		int count = this.globalSeats;
-		
-		
-		if(count <= 0) {
+
+		if (count <= 0) {
 			return "redirect:/booking/" + showId;
 		}
-		
-		if((seatCol+count)>10) {
+
+		if ((seatCol + count) > 10) {
 			return "redirect:/booking/" + showId;
 		}
-		
+
 		Integer[][] seatMat = ticket2SeatMatrix(showId);
-		for(int i=0;i<count;i++) {
-			
-			System.out.println("checking X"+(seatCol+i)+"Y"+seatRow);
-			System.out.println("SeatMat "+(seatMat[seatCol+i][seatRow]));
-			
-			if(seatMat[seatRow][seatCol+i] != 0 ) {
-				System.out.println("seat "+(seatCol+i)+" row "+seatRow+" is Taken.");
+		for (int i = 0; i < count; i++) {
+
+			System.out.println("checking X" + (seatCol + i) + "Y" + seatRow);
+			System.out.println("SeatMat " + (seatMat[seatCol + i][seatRow]));
+
+			if (seatMat[seatRow][seatCol + i] != 0) {
+				System.out.println("seat " + (seatCol + i) + " row " + seatRow + " is Taken.");
 				return "redirect:/booking/" + showId;
 			}
 		}
-		
+
 		Show show = showRepository.findById(showId);
 
 		System.out.println(count);
-		
+
 		Ticket[] ticket = new Ticket[count];
 
-		for(int i=0;i<count;i++) {
+		for (int i = 0; i < count; i++) {
 			ticket[i] = new Ticket();
-			ticket[i].setSeatCol(seatCol+i);
+			ticket[i].setSeatCol(seatCol + i);
 			ticket[i].setSeatRow(seatRow);
 			ticket[i].setShow(show);
 			ticketRepository.save(ticket[i]);
@@ -273,43 +263,42 @@ public class MovieController {
 		return "redirect:/booking/" + showId;
 	}
 
-	
 	@GetMapping(value = "/bookingRemove/{showId}/{seatRow}/{seatCol}")
-	public String unBookSeatPage(Map<String, Object> model, @PathVariable int showId,
-			@PathVariable int seatRow, @PathVariable int seatCol) {
-		
+	public String unBookSeatPage(Map<String, Object> model, @PathVariable int showId, @PathVariable int seatRow,
+			@PathVariable int seatCol) {
+
 		List<Ticket> tickets = ticketRepository.findAll();
-		
-		List<Ticket> showTickets = tickets.stream().
-				filter(b -> b.getShow().getId() == showId).
-				filter(r -> r.getSeatRow() == seatRow).
-				filter(c -> c.getSeatCol() == seatCol).
-				collect(Collectors.toList());
-		if(showTickets.size() != 1) {
+
+		List<Ticket> showTickets = tickets.stream().filter(b -> b.getShow().getId() == showId)
+				.filter(r -> r.getSeatRow() == seatRow).filter(c -> c.getSeatCol() == seatCol)
+				.collect(Collectors.toList());
+		if (showTickets.size() != 1) {
 			System.err.println(showTickets);
 		}
 		ticketRepository.delete(showTickets.get(0));
 		return "redirect:/booking/" + showId;
 	}
-	
-	public boolean isBetween(LocalDateTime datetime, Show show){
-        return !datetime.isBefore(show.start) && !datetime.isAfter(show.stop);
-    }
 
-    public boolean ifOverlapping(LocalDateTime start ,LocalDateTime end, Show show){
-        return start.isBefore(show.start) && end.isAfter(show.stop);
-    }
+	public boolean isBetween(LocalDateTime datetime, Show show) {
+		return !datetime.isBefore(show.start) && !datetime.isAfter(show.stop);
+	}
 
-    public boolean checkIfDatetimeOverlaps(LocalDateTime start, LocalDateTime end, int theatreId) {
-    	List<Show> shows = showRepository.findAll();
-    	
-        for (Show show : shows) {
-            if (isBetween(start, show) || isBetween(end, show)
-                    || ifOverlapping(start, end, show)) {
-                return true;
-            }
-        } return false;
-    }
+	public boolean ifOverlapping(LocalDateTime start, LocalDateTime end, Show show) {
+		return start.isBefore(show.start) && end.isAfter(show.stop);
+	}
 
+	public boolean checkIfDatetimeOverlaps(LocalDateTime start, LocalDateTime end, int theatreId) {
+		List<Show> shows = showRepository.findAll();
+
+		List<Show> showOverlaps = shows.stream().filter(b -> b.getTheatre().getId() == theatreId)
+				.collect(Collectors.toList());
+
+		for (Show show : showOverlaps) {
+			if (isBetween(start, show) || isBetween(end, show) || ifOverlapping(start, end, show)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 }
