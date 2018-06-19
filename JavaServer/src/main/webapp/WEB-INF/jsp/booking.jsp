@@ -35,7 +35,6 @@
 
 					<div class="seats">
 						<table>
-
 							<c:forEach begin="0" end="9" var="i">
 								<tr>
 									<c:forEach begin="0" end="9" var="j">
@@ -43,13 +42,13 @@
 										<c:choose>
 											<c:when test="${seats[i][j] != 0 }">
 												<td><a href="/bookingRemove/${show.getId()}/${i}/${j}">
-												<img src="/img/red.jpg">
+														<img src="/img/red.jpg">
 												</a>
 												<td />
 											</c:when>
 											<c:otherwise>
 												<td><a href="/bookingBook/${show.getId()}/${i}/${j}">
-												 <img src="/img/green.jpg">
+														<img src="/img/green.jpg">
 												</a>
 												<td />
 											</c:otherwise>
@@ -61,10 +60,11 @@
 						</table>
 					</div>
 				</div>
-				<%--
-			${i}:${j}:${seats[i][j]}
-			
-			 --%>
+				
+				<form:form method="POST" action="/bookingBook/seats/${show.getId()}">
+					<input type="text" name="seatCount" value="${multi}" />
+     				<input type="submit" value="Book Seats" name="button" />
+				</form:form>
 
 			</div>
 		</div>

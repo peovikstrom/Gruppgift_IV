@@ -28,8 +28,8 @@ public class Show {
     @Column(name = "show_id", updatable = false, nullable = false)
     private int id;
 
-    private LocalDateTime start;
-    private LocalDateTime stop;
+    public LocalDateTime start;
+    public LocalDateTime stop;
 
     @ManyToOne()
     @JoinColumn(name = "movie_id")
@@ -48,6 +48,7 @@ public class Show {
     
     public Show(String start, String stop, Movie movie, Theatre theatre) throws ShowCheckException, DateTimeParseException{
     	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    	    		
     	this.start = LocalDateTime.parse(start, formatter);
     	this.stop = LocalDateTime.parse(stop, formatter);
 		this.movie = movie;
@@ -58,6 +59,7 @@ public class Show {
 				movie == null ||
 				theatre == null )
 			throw new ShowCheckException("Invalid input");
+		
 		
 	}
 
@@ -107,6 +109,7 @@ public class Show {
     	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return this.stop.format(formatter);
     }
+    
 
     public void setStop(LocalDateTime stop) {
         this.stop = stop;
