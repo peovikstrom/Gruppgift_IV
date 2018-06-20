@@ -122,6 +122,20 @@ seats {
     background: #4d4d4d;
 }
 
+.show {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    padding: 15px;
+    background-color: #000000c4;
+    border-radius: 25px;
+
+}
+
+.show table{
+padding: 0px 70px 0px 100px;
+}
+
 form[type=seats] {
     display: flex;
     flex-direction: row;

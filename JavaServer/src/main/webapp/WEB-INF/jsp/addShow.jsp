@@ -35,7 +35,7 @@
 				<button name="movie">Lägg till show</button>
 
 			</form>
-
+            <div class="show">
 			<table>
 				<tr>
 					<th>Salonger</th>
@@ -62,8 +62,8 @@
 					</tr>
 				</c:forEach>
 			</table>
-
-
+        </div>
+        <div class="show">
 			<table>
 				<tr>
 					<th>Show</th>
@@ -81,7 +81,7 @@
 					</tr>
 				</c:forEach>
 			</table>
-
+        </div>
 
 
 		</div>
