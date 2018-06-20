@@ -100,12 +100,14 @@ public class MovieController {
 
 	@GetMapping(value = "/addShow")
 	public String addShowPage(Map<String, Object> model) {
-
+		
+		List<Theatre> theatres = theatreRepository.findAll();
 		List<Movie> movies = movieRepository.findAll();
 		List<Show> shows = showRepository.findAll();
 
 		model.put("movies", movies);
 		model.put("shows", shows);
+		model.put("theatres", theatres);
 
 		return "addShow";
 	}

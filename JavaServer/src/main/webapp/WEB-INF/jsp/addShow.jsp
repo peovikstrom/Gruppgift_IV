@@ -38,6 +38,20 @@
 
 			<table>
 				<tr>
+					<th>Salonger</th>
+					<th>Id</th>
+				</tr>
+				<c:forEach items="${theatres}" var="theat">
+					<tr>
+						<td>${ theat.getName() }</td>
+						<td>${ theat.getId() }</td>
+					</tr>
+				</c:forEach>
+			</table>
+
+
+			<table>
+				<tr>
 					<th>Movie</th>
 					<th>Id</th>
 				</tr>
