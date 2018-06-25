@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import movie.database.MovieRepository;
@@ -38,7 +39,8 @@ public class MovieController {
 	@Autowired
 	private TicketRepository ticketRepository;
 
-	@GetMapping(value = "/index")
+//	@GetMapping(value = "/index")
+	@RequestMapping(value = "/index")
 	public String indexPage(Map<String, Object> model) {
 		List<Theatre> theatres = theatreRepository.findAll();
 		List<Movie> movies = movieRepository.findAll();

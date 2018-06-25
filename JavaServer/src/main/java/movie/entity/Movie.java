@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+
 
 @Entity
 @Table(name = "movie")
@@ -24,6 +26,7 @@ public class Movie {
 	
 	private String uriPoster;
 	
+	@JsonGetter("uri")
     public String getUriPoster() {
 		return uriPoster;
 	}
@@ -37,7 +40,7 @@ public class Movie {
     	return String.format("Movie[id:%d, title:%s, desc:%s",id, title, description);
     }
 
-    // getters and setters
+	@JsonGetter("id")
     public int getId() {
 		return id;
 	}
@@ -46,6 +49,7 @@ public class Movie {
 		this.id = id;
 	}
 
+	@JsonGetter("title")
 	public String getTitle() {
 		return title;
 	}
@@ -54,6 +58,7 @@ public class Movie {
 		this.title = title;
 	}
 
+	@JsonGetter("desc")
 	public String getDescription() {
 		return description;
 	}

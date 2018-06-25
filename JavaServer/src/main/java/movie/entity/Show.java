@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonGetter;
 
 import movie.exception.ShowCheckException;
 
@@ -63,22 +66,34 @@ public class Show {
 		
 	}
 
-/*
     @Override
     public String toString() {
-    	return String.format("Book[id:%d, start:%s, stop:%s, movie_key:%d, theatre_key:%d",
-    			id, start.toString(), stop.toString(), movie_id, theatre_id );
+    	//{"id":2,"content":"Hello, User!"}
+    	return String.format("{\"id\":%d\"start\":%s,\"stop\":%s,\"movieID\":%d,\"theatreID\":%d}",
+    			id, start.toString(), stop.toString(), movie.getId(), theatre.getId() );
     }
-    */
 
+    public int getTheatreId() {
+    	return this.theatre.getId();
+    }
+    
+    @JsonGetter("theatre")
     public Theatre getTheatre() {
 		return theatre;
 	}
+
 
 	public void setTheatre(Theatre theatre) {
 		this.theatre = theatre;
 	}
 
+	@JsonGetter("tickets")
+	public List<Integer> getTicketIDs() {
+		List<Integer> tmp = this.tickets.stream().map(Ticket::getId).collect(Collectors.toList());
+		return tmp;
+		
+	}
+	
 	public List<Ticket> getTickets() {
 		return tickets;
 	}
@@ -87,7 +102,7 @@ public class Show {
 		this.tickets = tickets;
 	}
 
-	//getters and setters
+	@JsonGetter("id")
     public int getId() {
         return id;
     }
@@ -96,6 +111,7 @@ public class Show {
         this.id = id;
     }
 
+    @JsonGetter("start")
     public String getStart() {
     	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return this.start.format(formatter);
@@ -105,6 +121,7 @@ public class Show {
         this.start = start;
     }
 
+    @JsonGetter("stop")
     public String getStop() {
     	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return this.stop.format(formatter);
@@ -115,6 +132,7 @@ public class Show {
         this.stop = stop;
     }
 
+    @JsonGetter("movie")
     public Movie getMovie() {
         return movie;
     }

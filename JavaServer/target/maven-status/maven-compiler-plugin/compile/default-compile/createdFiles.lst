@@ -1,4 +1,16 @@
+movie\database\TheatreRepository.class
+movie\controller\MainRestController.class
 movie\entity\Ticket.class
 movie\controller\MovieController.class
+movie\entity\Movie.class
+movie\WebApplication.class
+movie\database\TicketRepository.class
+movie\Test.class
+movie\database\MovieRepository.class
+movie\entity\LocalDateTimeAttributeConverter.class
+movie\controller\MainController.class
+movie\entity\Theatre.class
 movie\entity\Customer.class
 movie\database\ShowRepository.class
+movie\entity\Show.class
+movie\exception\ShowCheckException.class

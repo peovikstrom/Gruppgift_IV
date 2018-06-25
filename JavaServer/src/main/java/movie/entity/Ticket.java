@@ -8,11 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 
 @Entity(name="ticket")
 public class Ticket {
-
-
 
 	@Id
 	//@GeneratedValue(strategy=GenerationType.AUTO)
@@ -28,18 +27,15 @@ public class Ticket {
     @JoinColumn(name = "show_id")
 	private Show show;
 
-
     @ManyToOne()
     @JoinColumn(name = "customer_id")
 	private Customer customer;
-
 
     @Override
     public String toString() {
     	return String.format("Ticket[id:%d, col:%d, row:%d",id, seatCol, seatRow);
     }
 
-	//getters and setters
 	public int getId() {
 		return id;
 	}
@@ -48,6 +44,7 @@ public class Ticket {
 		this.id = id;
 	}
 
+	@JsonGetter("seatrow")
 	public int getSeatRow() {
 		return seatRow;
 	}
@@ -56,6 +53,7 @@ public class Ticket {
 		this.seatRow = seatRow;
 	}
 
+	@JsonGetter("seatcol")
 	public int getSeatCol() {
 		return seatCol;
 	}
@@ -63,6 +61,7 @@ public class Ticket {
 	public void setSeatCol(int seatCol) {
 		this.seatCol = seatCol;
 	}
+	
 	public Show getShow() {
 		return show;
 	}
@@ -71,6 +70,7 @@ public class Ticket {
 		this.show = show;
 	}
 
+	@JsonGetter("customer")
 	public Customer getCustomer() {
 		return customer;
 	}

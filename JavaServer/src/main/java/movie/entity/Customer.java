@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+
 @Entity(name = "customer")
 @Table(name = "customer")
 public class Customer {
@@ -28,7 +30,7 @@ public class Customer {
     }
     */
 
-	//getters and setters
+	@JsonGetter("id")
 	public int getId() {
 		return id;
 	}
@@ -37,6 +39,7 @@ public class Customer {
 		this.id = id;
 	}
 
+	@JsonGetter("name")
 	public String getName() {
 		return name;
 	}
@@ -45,6 +48,7 @@ public class Customer {
 		this.name = name;
 	}
 
+	@JsonGetter("adress")
 	public String getAdress() {
 		return adress;
 	}
@@ -53,6 +57,7 @@ public class Customer {
 		this.adress = adress;
 	}
 
+	@JsonGetter("phone")
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
