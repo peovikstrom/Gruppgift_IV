@@ -1,21 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SalongComponent } from './salong/salong.component';
-import { FilmComponent } from './film/film.component';
-import { ShowComponent } from './show/show.component';
+
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SalongComponent,
-    FilmComponent,
-    ShowComponent
+    routingComponents
   ],
   imports: [
     BrowserModule,
+    NgbModule.forRoot(),
     AppRoutingModule
   ],
   providers: [],
