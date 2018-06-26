@@ -48,15 +48,9 @@ public class MainRestController {
 		return ticktest;
 	}
 
-	@GetMapping(value = "/test2")
+	@GetMapping(value = "/allshows")
 	public List<Show> indexPage2(Map<String, Object> model) {
-		
-		List<Show> test = showRepository.findAll();
-		Movie testmov = movieRepository.findById(1);
-		Theatre theatre = theatreRepository.findById(1);
-		Ticket ticktest = ticketRepository.findById(2);
-		
-		return test;
+		return showRepository.findAll();
 	}
 
 }
