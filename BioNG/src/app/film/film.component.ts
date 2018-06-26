@@ -9,12 +9,12 @@ import { IMovie } from '../imovie';
 })
 export class FilmComponent implements OnInit {
 
-  public movie: IMovie;
+  public movie: IMovie[];
 
   constructor(private _dataService: DataService) { }
 
   ngOnInit() {
-    this._dataService.getMovie()
+    this._dataService.getAllMovies()
       .subscribe(data => this.movie = data);
   }
 

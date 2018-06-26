@@ -37,8 +37,13 @@ public class MainRestController {
 	@Autowired
 	private TicketRepository ticketRepository;
 
-	@GetMapping(value = "/test")
-	public Ticket indexPage(Map<String, Object> model) {
+	@GetMapping(value = "/allmovies")
+	public List<Movie> moviePage(Map<String, Object> model) {
+		return movieRepository.findAll();
+	}
+
+	@GetMapping(value = "/test1")
+	public Ticket indexPage1(Map<String, Object> model) {
 		
 		Show test = showRepository.findById(1);
 		Movie testmov = movieRepository.findById(1);
@@ -48,6 +53,7 @@ public class MainRestController {
 		return ticktest;
 	}
 
+	
 	@GetMapping(value = "/allshows")
 	//Comment
 	public List<Show> indexPage2(Map<String, Object> model) {

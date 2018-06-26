@@ -19,8 +19,8 @@ export class DataService {
     return this._http.get(this.baseUrl);
   }
 
-  getMovie(): Observable<IMovie> {
-    return this._http.get<IMovie>(this.baseUrl);
+  getAllMovies(): Observable<IMovie[]> {
+    return this._http.get<IMovie[]>('http://localhost:8080/api/allmovies');
   }
 
   getAllShows(): Observable<IShow[]> {
