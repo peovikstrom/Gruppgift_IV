@@ -6,4 +6,13 @@ import { Injectable } from '@angular/core';
 export class DataService {
 
   constructor() { }
+
+  getShows() {
+    return [
+      {
+        showId: 1,
+        movieId: 2
+      }
+    ];
+  }
 }

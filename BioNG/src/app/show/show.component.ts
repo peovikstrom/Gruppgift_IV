@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-show',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShowComponent implements OnInit {
 
-  constructor() { }
+  public shows = [];
+
+  constructor(private _dataService: DataService) { }
 
   ngOnInit() {
+    this.shows = this._dataService.getShows();
   }
 
 }
