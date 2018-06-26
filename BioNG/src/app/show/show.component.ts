@@ -11,6 +11,11 @@ export class ShowComponent implements OnInit {
   public shows = [];
   public test;
 
+  public foo = {
+    showId: 1,
+    movieId: 2
+  };
+
   constructor(private _dataService: DataService) { }
 
   ngOnInit() {
