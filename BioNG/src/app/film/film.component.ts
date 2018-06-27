@@ -9,9 +9,13 @@ import { IMovie } from '../imovie';
 })
 export class FilmComponent implements OnInit {
 
-  public movie: IMovie[];
+  public movie: IMovie[] = [];
 
   constructor(private _dataService: DataService) { }
+
+  postIT() {
+    this._dataService.postMovie();
+  }
 
   ngOnInit() {
     this._dataService.getAllMovies()
