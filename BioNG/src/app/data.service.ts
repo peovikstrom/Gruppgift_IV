@@ -55,8 +55,9 @@ export class DataService {
     // foo = this._http.post<IMovie>('http://localhost:8080/api/posttest', JSON.stringify(this.testmov), this.httpOptions);
 
     foo = this._http.post<IMovie>('http://localhost:8080/api/posttest', this.testmov, this.httpOptions)
-      .toPromise()
-      .catch(this.handleError);
+      .subscribe((data: any) => {
+        console.log(data);
+      });
 
 
     // .pipe(tap((hero: Hero) => this.log(`added hero w/ id=${hero.id}`)),catchError(this.handleError<Hero>('addHero'))

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,7 @@ import movie.entity.Theatre;
 import movie.entity.Ticket;
 
 @RestController
+@CrossOrigin
 @RequestMapping({"/api"})
 public class MainRestController {
 
@@ -62,12 +64,12 @@ public class MainRestController {
 	}
 	
 	@PostMapping(value = "/posttest")
-	//public String postTest(@RequestBody Movie movie){
-	public String postTest(Map<String, Object> movie){
+	public String postTest(@RequestBody Movie movie){
+	//public String postTest(String movie){
 		
 		System.out.println("POST");
 		System.out.println(movie);
-		return "POSTMAN";
+		return "{ret: \"POSTMAN\"}";
 	}
 
 }
