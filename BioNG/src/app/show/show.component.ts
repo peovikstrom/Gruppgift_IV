@@ -17,7 +17,7 @@ export class ShowComponent implements OnInit {
 
   ngOnInit() {
     this._dataService.getAllShows()
-      .subscribe( (data: string) => {
+      .subscribe( data => {
         this.shows = data;
         this.jsonTest = JSON.stringify(data);
       });
