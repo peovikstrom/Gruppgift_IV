@@ -18,7 +18,6 @@ export class FilmComponent implements OnInit {
   constructor(private _dataService: DataService) { }
 
   postIT() {
-    console.log("POSTIT");
     this._dataService.postMovie()
       .subscribe( (data: any) => {
         this.postResponse = data.ret;
