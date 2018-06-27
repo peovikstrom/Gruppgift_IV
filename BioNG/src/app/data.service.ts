@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 
 import { IMovie } from './imovie';
 import { IShow } from './ishow';
+import { ITicket } from './iticket';
+import { ITheatre } from './itheatre';
 
 @Injectable({
   providedIn: 'root'
@@ -16,16 +18,8 @@ export class DataService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  testmov: IMovie = {
-      id: 1,
-      title: 'My Little Pony',
-      desc: 'Friendship is Magic',
-      uri: 'https://i.pinimg.com/736x/1a/d9/d4/1ad9d4743e0fe8ec589469c35e2cd294.jpg'
-  };
-
-
   constructor(private _http: HttpClient) {
-    this.baseUrl = 'http://localhost:8080/api/test';
+    this.baseUrl = 'http://localhost:8080/api/';
   }
 
   getTest() {
@@ -40,16 +34,24 @@ export class DataService {
     return this._http.get<IShow[]>('http://localhost:8080/api/allshows');
   }
 
-  postMovie() {
-    return this._http.post<string>('http://localhost:8080/api/postmovie', this.testmov, this.httpOptions);
+  getAllTickets(): Observable<ITicket[]> {
+    return this._http.get<ITicket[]>('http://localhost:8080/api/alltickets');
   }
 
-  getShows() {
-    return [
-      {
-        showId: 1,
-        movieId: 2
-      }
-    ];
+  getAllTheatres(): Observable<ITheatre[]> {
+    return this._http.get<ITheatre[]>('http://localhost:8080/api/alltheatres');
   }
+
+  postMovie(movie: IMovie) {
+    return this._http.post<string>('http://localhost:8080/api/postmovie', movie, this.httpOptions);
+  }
+
+  postShow(show: IShow) {
+    return this._http.post<string>('http://localhost:8080/api/postshow', show, this.httpOptions);
+  }
+
+  postTicket(ticket: ITicket) {
+    return this._http.post<string>('http://localhost:8080/api/postticket', ticket, this.httpOptions);
+  }
+
 }

@@ -41,13 +41,8 @@ public class MainRestController {
 	@Autowired
 	private TicketRepository ticketRepository;
 
-	@GetMapping(value = "/allmovies")
-	public List<Movie> moviePage(Map<String, Object> model) {
-		return movieRepository.findAll();
-	}
-
 	@GetMapping(value = "/test1")
-	public Ticket indexPage1(Map<String, Object> model) {
+	public Ticket indexPageTest(Map<String, Object> model) {
 		
 		Show test = showRepository.findById(1);
 		Movie testmov = movieRepository.findById(1);
@@ -57,12 +52,26 @@ public class MainRestController {
 		return ticktest;
 	}
 
-	
+	@GetMapping(value = "/allmovies")
+	public List<Movie> moviePage(Map<String, Object> model) {
+		return movieRepository.findAll();
+	}
+
 	@GetMapping(value = "/allshows")
-	public List<Show> indexPage2(Map<String, Object> model) {
+	public List<Show> indexPage1(Map<String, Object> model) {
 		return showRepository.findAll();
 	}
-	
+
+	@GetMapping(value = "/alltickets")
+	public List<Ticket> indexPage2(Map<String, Object> model) {
+		return ticketRepository.findAll();
+	}
+
+	@GetMapping(value = "/alltheatre")
+	public List<Theatre> indexPage3(Map<String, Object> model) {
+		return theatreRepository.findAll();
+	}
+
 	@PostMapping(value = "/postmovie")
 	public String postmovie(@RequestBody Movie movie){
 		
@@ -71,5 +80,25 @@ public class MainRestController {
 		
 		return "{\"ret\": \"MOVIE THROWN\"}";
 	}
+	
+	@PostMapping(value = "/postshow")
+	public String postshow(@RequestBody Show show){
+		
+		System.out.println("POST");
+		System.out.println(show);
+		
+		return "{\"ret\": \"SHOW THROWN\"}";
+	}
+	
+	@PostMapping(value = "/postticket")
+	public String postticket(@RequestBody Ticket ticket){
+		
+		System.out.println("POST");
+		System.out.println(ticket);
+		
+		return "{\"ret\": \"SHOW THROWN\"}";
+	}
+
+
 
 }
