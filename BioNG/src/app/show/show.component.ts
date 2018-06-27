@@ -7,21 +7,19 @@ import { IShow } from '../ishow';
   templateUrl: './show.component.html',
   styleUrls: ['./show.component.css']
 })
+
 export class ShowComponent implements OnInit {
 
   public shows: IShow[];
-  public test;
-
-  public foo = {
-    showId: 1,
-    movieId: 2
-  };
+  public jsonTest = '';
 
   constructor(private _dataService: DataService) { }
 
   ngOnInit() {
-    // this._dataService.getTest();
-    this._dataService.getAllShows().subscribe(data => this.shows = data);
+    this._dataService.getAllShows()
+      .subscribe( (data: string) => {
+        this.shows = data;
+        this.jsonTest = JSON.stringify(data);
+      });
   }
-
 }

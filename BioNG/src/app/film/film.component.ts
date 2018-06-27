@@ -10,7 +10,12 @@ import { Observable } from 'rxjs';
 })
 export class FilmComponent implements OnInit {
 
-  public movie: IMovie[] = [];
+  public movie: IMovie[] = [{
+    id: 0,
+    title: 'unknown',
+    desc: 'unknown',
+    uri: 'unknown',
+  }];
 
   postResponse = 'POSTRESP';
 
@@ -35,5 +40,4 @@ export class FilmComponent implements OnInit {
     this._dataService.getAllMovies()
       .subscribe(data => this.movie = data);
   }
-
 }
