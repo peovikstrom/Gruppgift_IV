@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from '../../node_modules/rxjs';
+import { IMovie } from './imovie';
+import { IShow } from './ishow';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +17,14 @@ export class DataService {
 
   getTest() {
     return this._http.get(this.baseUrl);
+  }
+
+  getAllMovies(): Observable<IMovie[]> {
+    return this._http.get<IMovie[]>('http://localhost:8080/api/allmovies');
+  }
+
+  getAllShows(): Observable<IShow[]> {
+    return this._http.get<IShow[]>('http://localhost:8080/api/allshows');
   }
 
   getShows() {
