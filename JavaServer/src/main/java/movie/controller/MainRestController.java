@@ -63,13 +63,13 @@ public class MainRestController {
 		return showRepository.findAll();
 	}
 	
-	@PostMapping(value = "/posttest")
-	public String postTest(@RequestBody Movie movie){
-	//public String postTest(String movie){
+	@PostMapping(value = "/postmovie")
+	public String postmovie(@RequestBody Movie movie){
 		
 		System.out.println("POST");
 		System.out.println(movie);
-		return "{ret: \"POSTMAN\"}";
+		
+		return "{\"ret\": \"MOVIE THROWN\"}";
 	}
 
 }
