@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from '../../node_modules/rxjs';
 import { IMovie } from './imovie';
 import { IShow } from './ishow';
@@ -10,6 +10,18 @@ import { IShow } from './ishow';
 export class DataService {
 
   baseUrl = '';
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
+  testmov: IMovie = {
+      id: 1,
+      title: 'My Little Pony',
+      desc: 'Friendship is Magic',
+      uri: 'https://i.pinimg.com/736x/1a/d9/d4/1ad9d4743e0fe8ec589469c35e2cd294.jpg'
+  };
+
 
   constructor(private _http: HttpClient) {
     this.baseUrl = 'http://localhost:8080/api/test';
@@ -25,6 +37,11 @@ export class DataService {
 
   getAllShows(): Observable<IShow[]> {
     return this._http.get<IShow[]>('http://localhost:8080/api/allshows');
+  }
+
+
+  postMovie() {
+    return this._http.post('http://localhost:8080/api/posttest', JSON.stringify(this.testmov), this.httpOptions);
   }
 
   getShows() {
