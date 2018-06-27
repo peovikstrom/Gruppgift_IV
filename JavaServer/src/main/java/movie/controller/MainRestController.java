@@ -62,7 +62,9 @@ public class MainRestController {
 	}
 	
 	@PostMapping(value = "/posttest")
-	public String postTest(@RequestBody Movie movie){
+	//public String postTest(@RequestBody Movie movie){
+	public String postTest(Map<String, Object> movie){
+		
 		System.out.println("POST");
 		System.out.println(movie);
 		return "POSTMAN";

@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from '../../node_modules/rxjs';
+// import { Observable, observable } from '../../node_modules/rxjs';
+import {Observable} from 'rxjs';
+
 import { IMovie } from './imovie';
 import { IShow } from './ishow';
+import { HttpRequest } from '../../node_modules/@types/selenium-webdriver/http';
 
 @Injectable({
   providedIn: 'root'
@@ -39,11 +42,27 @@ export class DataService {
     return this._http.get<IShow[]>('http://localhost:8080/api/allshows');
   }
 
+  handleError() {
+    console.log('HANDLE ERROR');
+  }
 
   postMovie() {
+
+    let foo = null;
+
     console.log('DataService postMovie');
     console.log(JSON.stringify(this.testmov));
-    return this._http.post('http://localhost:8080/api/posttest', JSON.stringify(this.testmov), this.httpOptions);
+    // foo = this._http.post<IMovie>('http://localhost:8080/api/posttest', JSON.stringify(this.testmov), this.httpOptions);
+
+    foo = this._http.post<IMovie>('http://localhost:8080/api/posttest', this.testmov, this.httpOptions)
+      .toPromise()
+      .catch(this.handleError);
+
+
+    // .pipe(tap((hero: Hero) => this.log(`added hero w/ id=${hero.id}`)),catchError(this.handleError<Hero>('addHero'))
+
+    console.log(foo);
+    return foo;
   }
 
   getShows() {
