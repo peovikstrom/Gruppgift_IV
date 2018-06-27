@@ -1,16 +1,48 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div class="container">
- <div class="jumbotron">
-    <h1>
-      Welcome to {{ title }}!
-    </h1>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <nav class="navbar bg-dark navbar-dark navbar-expand-sm">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/show">SHOW </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/film">Movie</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/salong">Salong</a>
+      </li>
+    </ul>
+    <div class="nav-item">
+      <a class="nav-link" href="https://github.com/kajih/Gruppgift_IV/tree/NGExpansion">Github</a>
+    </div>
+  </nav>
+  <div class="container">
+
+    <div class="jumbotron">
+      <h1>
+        Welcome to {{ title }}!
+      </h1>
+    </div>
+    <router-outlet></router-outlet>
   </div>
+  <footer class="page-footer mdb-color text-center fixed-bottom">
+    <hr> Webmaster: Johan, Jesper, Peo
+    <div class="footer-copyright text-center py-3">
+      <div class="container-fluid">
+        © 2017 Copyright: {{ title }}
+      </div>
+    </div>
 
-  <nav>
-    <a routerLink="/show">SHOW </a>
-    <a routerLink="/film">Movie </a>
-    <a routerLink="/salong">Salong </a>
-  </nav> 
-  <router-outlet></router-outlet>
-</div>
+  </footer>
 
+</body>
+
+</html>
