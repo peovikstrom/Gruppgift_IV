@@ -13,6 +13,10 @@ export class FilmComponent implements OnInit {
 
   constructor(private _dataService: DataService) { }
 
+  postIT() {
+    this._dataService.postMovie();
+  }
+
   ngOnInit() {
     this._dataService.getAllMovies()
       .subscribe(data => this.movie = data);

@@ -41,6 +41,8 @@ export class DataService {
 
 
   postMovie() {
+    console.log('DataService postMovie');
+    console.log(JSON.stringify(this.testmov));
     return this._http.post('http://localhost:8080/api/posttest', JSON.stringify(this.testmov), this.httpOptions);
   }
 
