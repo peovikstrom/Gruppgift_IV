@@ -26,19 +26,19 @@ export class DataService {
   constructor(private _http: HttpClient) {
     this.baseUrl = 'http://localhost:8080/api/';
   }
-
+  getCachedMovies(): IMovie[] { return this.movies; }
   getAllMovies(): Observable<IMovie[]> {
     return this._http.get<IMovie[]>('http://localhost:8080/api/allmovies');
   }
-
+  getCachedShows(): IShow[] { return this.shows; }
   getAllShows(): Observable<IShow[]> {
     return this._http.get<IShow[]>('http://localhost:8080/api/allshows');
   }
-
+  getCachedTickets(): ITicket[] { return this.tickets; }
   getAllTickets(): Observable<ITicket[]> {
     return this._http.get<ITicket[]>('http://localhost:8080/api/alltickets');
   }
-
+  getCachedTheatres(): ITheatre[] { return this.theatres; }
   getAllTheatres(): Observable<ITheatre[]> {
     return this._http.get<ITheatre[]>('http://localhost:8080/api/alltheatre');
   }

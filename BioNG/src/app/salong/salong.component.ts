@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { IShow } from '../ishow';
 import { ActivatedRoute } from '@angular/router';
+import { ITheatre } from '../itheatre';
 
 @Component({
   selector: 'app-salong',
@@ -9,7 +10,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./salong.component.css']
 })
 export class SalongComponent implements OnInit {
-  public componentId = 0;
 
   public salNum = 'Ett';
   public greeting = '';
@@ -22,9 +22,15 @@ export class SalongComponent implements OnInit {
     private _route: ActivatedRoute
     ) { }
 
+
+  myTheatre() {
+    return this._dataService.getCachedTheatres()[this.getID()];
+  }
+
   getID() {
     return parseInt(this._route.snapshot.paramMap.get('id'), 10);
   }
+
   ngOnInit() {
     this._dataService.getAllShows()
     .subscribe( data => {
