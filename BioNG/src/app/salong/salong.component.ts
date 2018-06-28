@@ -16,6 +16,10 @@ export class SalongComponent implements OnInit {
 
   constructor(private _dataService: DataService) { }
 
+  firstshow() {
+    return this.shows[0];
+  }
+
   ngOnInit() {
     this._dataService.getAllShows()
     .subscribe( data => {
