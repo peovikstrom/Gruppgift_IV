@@ -1,26 +1,27 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
+import { IShow } from '../ishow';
 
 @Component({
   selector: 'app-salong',
-  template: `<div>
-                  {{greetVisitor()}} in Salong {{salNum}}<br>
-                  <button (click)="onClick()">Greet</button>
-                  {{greeting}}
-              </div>`,
-  styles: [`div {
-                  color: blue;
-                }
-            `]
+  templateUrl: './salong.component.html',
+  styleUrls: ['./salong.component.css']
 })
 export class SalongComponent implements OnInit {
   public salNum = 'Ett';
   public greeting = '';
-  constructor() { }
+
+  public shows: IShow[];
+  public jsonTest = '';
+
+  constructor(private _dataService: DataService) { }
 
   ngOnInit() {
-  }
-  greetVisitor() {
-    return 'Welcome to the movies!';
+    this._dataService.getAllShows()
+    .subscribe( data => {
+      this.shows = data;
+      this.jsonTest = JSON.stringify(data);
+    });
   }
 
   onClick() {
