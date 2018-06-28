@@ -22,16 +22,15 @@ export class SalongComponent implements OnInit {
     private _route: ActivatedRoute
     ) { }
 
+  getID() {
+    return parseInt(this._route.snapshot.paramMap.get('id'), 10);
+  }
   ngOnInit() {
     this._dataService.getAllShows()
     .subscribe( data => {
       this.shows = data;
       this.jsonTest = JSON.stringify(data);
     });
-
-    this.componentId = parseInt(this._route.snapshot.paramMap.get('id'), 10);
-
-    console.log('Salong init');
 
   }
 
