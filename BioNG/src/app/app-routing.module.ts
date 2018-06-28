@@ -6,7 +6,7 @@ import { FilmComponent } from './film/film.component';
 import { ShowComponent } from './show/show.component';
 
 const routes: Routes = [
-  {path: 'salong', component: SalongComponent },
+  {path: 'salong/:id', component: SalongComponent },
   {path: 'film', component: FilmComponent },
   {path: 'show', component: ShowComponent }
 ];

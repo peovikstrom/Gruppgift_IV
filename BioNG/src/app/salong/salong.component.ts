@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { IShow } from '../ishow';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-salong',
@@ -8,17 +9,18 @@ import { IShow } from '../ishow';
   styleUrls: ['./salong.component.css']
 })
 export class SalongComponent implements OnInit {
+  public componentId = 0;
+
   public salNum = 'Ett';
   public greeting = '';
 
   public shows: IShow[];
   public jsonTest = '';
 
-  constructor(private _dataService: DataService) { }
-
-  firstshow() {
-    return this.shows[0];
-  }
+  constructor(
+    private _dataService: DataService,
+    private _route: ActivatedRoute
+    ) { }
 
   ngOnInit() {
     this._dataService.getAllShows()
@@ -26,6 +28,11 @@ export class SalongComponent implements OnInit {
       this.shows = data;
       this.jsonTest = JSON.stringify(data);
     });
+
+    this.componentId = parseInt(this._route.snapshot.paramMap.get('id'), 10);
+
+    console.log('Salong init');
+
   }
 
   onClick() {

@@ -14,6 +14,8 @@ export class DataService {
 
   baseUrl = '';
 
+  tickets: ITicket[] = [];
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -39,7 +41,7 @@ export class DataService {
   }
 
   getAllTheatres(): Observable<ITheatre[]> {
-    return this._http.get<ITheatre[]>('http://localhost:8080/api/alltheatres');
+    return this._http.get<ITheatre[]>('http://localhost:8080/api/alltheatre');
   }
 
   postMovie(movie: IMovie) {
@@ -52,6 +54,23 @@ export class DataService {
 
   postTicket(ticket: ITicket) {
     return this._http.post<string>('http://localhost:8080/api/postticket', ticket, this.httpOptions);
+  }
+
+  cacheTickets() {
+    this._http.get<ITicket[]>('http://localhost:8080/api/alltickets').subscribe( tickets => {
+      this.tickets = tickets;
+    });
+
+  }
+
+  tickets4show(show: IShow) {
+    if ( this.tickets === [] ) {
+      return [];
+    }
+
+    return this.tickets.filter( t => {
+      return (t.show === show);
+    });
   }
 
 }

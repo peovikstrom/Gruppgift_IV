@@ -16,8 +16,10 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/film">Movie</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/salong">Salong</a>
+      <li *ngFor="let lnk of theatres;index as i" class="nav-item">
+        <a class="nav-link" (click)="onSelect(i)">
+          {{lnk.name}}
+        </a>
       </li>
     </ul>
     <div class="nav-item">
