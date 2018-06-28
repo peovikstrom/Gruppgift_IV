@@ -15,6 +15,9 @@ export class DataService {
   baseUrl = '';
 
   tickets: ITicket[] = [];
+  shows: IShow[] = [];
+  theatres: ITheatre[] = [];
+  movies: IMovie[] = [];
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,10 +25,6 @@ export class DataService {
 
   constructor(private _http: HttpClient) {
     this.baseUrl = 'http://localhost:8080/api/';
-  }
-
-  getTest() {
-    return this._http.get(this.baseUrl);
   }
 
   getAllMovies(): Observable<IMovie[]> {
@@ -56,20 +55,29 @@ export class DataService {
     return this._http.post<string>('http://localhost:8080/api/postticket', ticket, this.httpOptions);
   }
 
-  cacheTickets() {
-    this._http.get<ITicket[]>('http://localhost:8080/api/alltickets').subscribe( tickets => {
-      this.tickets = tickets;
-    });
-
+  cacheData() {
+    this._http.get<ITicket[]>('http://localhost:8080/api/alltickets').subscribe( tickets => { this.tickets = tickets; });
+    this._http.get<ITheatre[]>('http://localhost:8080/api/alltheatre').subscribe( theatres => { this.theatres = theatres; });
+    this._http.get<IShow[]>('http://localhost:8080/api/allshows').subscribe( shows => { this.shows = shows; });
+    this._http.get<IMovie[]>('http://localhost:8080/api/allmovies').subscribe( movies => { this.movies = movies; });
   }
+
 
   tickets4show(show: IShow) {
     if ( this.tickets === [] ) {
       return [];
     }
-
     return this.tickets.filter( t => {
       return (t.show === show);
+    });
+  }
+
+  show4theatre(theatre: ITheatre) {
+    if ( this.shows === [] ) {
+      return [];
+    }
+    return this.shows.filter( s => {
+      return (s.theatre === theatre);
     });
   }
 

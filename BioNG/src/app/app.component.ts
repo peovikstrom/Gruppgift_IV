@@ -28,6 +28,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this._dataService.cacheData();
+
     this._dataService.getAllTheatres().subscribe(t => {
       this.theatres = t;
     });
