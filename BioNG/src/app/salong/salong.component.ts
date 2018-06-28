@@ -11,6 +11,8 @@ import { ITheatre } from '../itheatre';
 })
 export class SalongComponent implements OnInit {
 
+  public httpBase = 'http://localhost:8080/';
+
   public salNum = 'Ett';
   public greeting = '';
 

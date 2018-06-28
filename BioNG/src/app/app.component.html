@@ -21,6 +21,16 @@
           {{lnk.name}}
         </a>
       </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Salonger</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+            
+          <a *ngFor="let lnk of theatres;index as i" class="nav-link" (click)="onSelect(i)">
+            {{lnk.name}}
+          </a>
+        </div>
+      </li>
+
     </ul>
     <div class="nav-item">
       <a class="nav-link" href="https://github.com/kajih/Gruppgift_IV/tree/NGExpansion">Github</a>
