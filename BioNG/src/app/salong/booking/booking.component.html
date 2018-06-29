@@ -2,4 +2,10 @@
   booking works!
 </p>
 
-<app-seat [colx]="33" [coly]="44" [show]="show"> </app-seat>
+<div *ngFor="let row of xrange(10)"> 
+    <p *ngFor="let col of xrange(10)">
+        <app-seat [colx]="row" [coly]="col" [show]="show"> </app-seat>
+    </p> 
+    <br>
+</div>
+

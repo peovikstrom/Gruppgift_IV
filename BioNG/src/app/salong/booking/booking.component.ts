@@ -12,6 +12,14 @@ export class BookingComponent implements OnInit {
 
   constructor() { }
 
+  xrange(cnt): number[] {
+    const a = [];
+    for (let i = 0; i < cnt; i++) {
+      a.push(i);
+    }
+    return a;
+  }
+
   ngOnInit() {
   }
 
