@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { IShow } from '../../ishow';
 
 @Component({
   selector: 'app-booking',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./booking.component.css']
 })
 export class BookingComponent implements OnInit {
+
+  @Input() show: IShow;
 
   constructor() { }
 

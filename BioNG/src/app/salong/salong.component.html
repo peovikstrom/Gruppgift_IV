@@ -1,7 +1,4 @@
 
-
-BOOTJS: 
-
 <div *ngFor="let item of myShows()" class="card col-md-3">
         <img class="card-img-top" src="{{httpBase + item.movie.uri}}" alt="Card image">
         <div class="card-body">
@@ -9,6 +6,9 @@ BOOTJS:
           <p class="card-text">{{item.movie.desc}}}</p>
           <a href="#" class="btn btn-primary">See Profile</a>
         </div>
+
+        <app-booking [show]="item"></app-booking>
+
       </div>
 
       
