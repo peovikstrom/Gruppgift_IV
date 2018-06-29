@@ -15,6 +15,7 @@ import { ITicketSTUB } from '../../../iticketstub';
    `,
   styleUrls: ['./seat.component.css']
 })
+
 export class SeatComponent implements OnInit {
 
   private base = 'http://localhost:8080';
@@ -48,20 +49,36 @@ export class SeatComponent implements OnInit {
   }
 
   dbBook() {
-    const t: ITicketSTUB = <ITicketSTUB>{};
+    const t: ITicket = <ITicket>{}; // A Cheat ticket
+
+    let t4s = this._dataService.tickets4show(this.show);
+    t4s = t4s.filter( ts => ts.seatcol === this.colx && ts.seatrow === this.coly);
 
     t.seatcol = this.colx; // WTF TODO FIX THIS
     t.seatrow = this.coly;
-    t.showid = this.show.id;
+    t.show = this.show;
 
-    this._dataService.postTicket(t).subscribe( ret => {
-      console.log('Ticket registered :' + ret);
-    });
+    if ( t4s.length === 0 ) {
+
+      this._dataService.postTicket(t).subscribe( ret => {
+        console.log('Ticket registered :' + ret);
+      });
+
+    } else {
+
+      t.id = t4s[0].id;
+
+      this._dataService.postUnTicket(t).subscribe( ret => {
+        console.log('Ticket unRegistered :' + ret);
+      });
+
+    }
+
     console.log('book x:' + this.colx + ' y:' + this.coly );
   }
 
   ngOnInit() {
-    interval(250).subscribe( x => {
+    interval(150).subscribe( x => {
       this.updateColor();
     });
   }

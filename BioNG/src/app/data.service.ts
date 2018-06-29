@@ -53,11 +53,36 @@ export class DataService {
     return this._http.post<string>('http://localhost:8080/api/postshow', show, this.httpOptions);
   }
 
-  postTicket(ticket: IGreyTicket) {
-    // this.tickets.push(ticket);
+  postTicket(ticket: ITicket) {
+
+    const stubTicket = <ITicketSTUB>{};
+
+    stubTicket.ticketid = ticket.id;
+    stubTicket.seatcol = ticket.seatcol;
+    stubTicket.seatrow = ticket.seatrow;
+    stubTicket.showid = ticket.show.id;
+
+    this.tickets.push(ticket);
+
     console.log(ticket);
-    return this._http.post<string>('http://localhost:8080/api/postticket', ticket, this.httpOptions);
+    return this._http.post<string>('http://localhost:8080/api/postticket', stubTicket, this.httpOptions);
   }
+
+  postUnTicket(ticket: ITicket) {
+
+    const stubTicket = <ITicketSTUB>{};
+
+    stubTicket.ticketid = ticket.id;
+    stubTicket.seatcol = ticket.seatcol;
+    stubTicket.seatrow = ticket.seatrow;
+    stubTicket.showid = ticket.show.id;
+
+    this.tickets = this.tickets.filter( tr => tr.id !== ticket.id );
+
+    console.log(ticket);
+    return this._http.post<string>('http://localhost:8080/api/postunticket', stubTicket, this.httpOptions);
+  }
+
 
   cacheData() {
     this._http.get<ITicket[]>('http://localhost:8080/api/alltickets').subscribe( tickets => { this.tickets = tickets; });
