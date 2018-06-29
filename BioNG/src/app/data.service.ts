@@ -6,6 +6,7 @@ import { IMovie } from './imovie';
 import { IShow } from './ishow';
 import { ITicket } from './iticket';
 import { ITheatre } from './itheatre';
+import { tick } from '../../node_modules/@angular/core/testing';
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +53,7 @@ export class DataService {
   }
 
   postTicket(ticket: ITicket) {
+    this.tickets.push(ticket);
     return this._http.post<string>('http://localhost:8080/api/postticket', ticket, this.httpOptions);
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, IterableDiffers } from '@angular/core';
 import { DataService } from '../../../data.service';
 import { IShow } from '../../../ishow';
 
@@ -9,7 +9,7 @@ import { ITheatre } from '../../../itheatre';
 @Component({
   selector: 'app-seat',
   template: `
-    <a href="#">	<img src="{{checkStatus()}}"> </a>
+    <img height="10px" width="20px" src="{{checkStatus()}}" (click)="dbBook()">
    `,
   styleUrls: ['./seat.component.css']
 })
@@ -43,6 +43,22 @@ export class SeatComponent implements OnInit {
     } else {
       this.status = this.base + this.greenSeat;
     }
+  }
+
+  dbBook() {
+    const t: ITicket = <ITicket>{};
+
+    t.seatcol = this.colx; // WTF TODO FIX THIS
+    t.seatrow = this.coly;
+    t.show = this.show;
+
+    this._dataService.postTicket(t).subscribe( ret => {
+      console.log('Ticket registered');
+      this._dataService.cacheData();
+      this.updateColor();
+    });
+
+    console.log('book x:' + this.colx + ' y:' + this.coly );
   }
 
   ngOnInit() {
