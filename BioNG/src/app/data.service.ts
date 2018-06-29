@@ -67,18 +67,15 @@ export class DataService {
     if ( this.tickets === [] ) {
       return [];
     }
-    return this.tickets.filter( t => {
-      return (t.show === show);
-    });
+    return this.tickets.filter( t => t.show.id === show.id );
   }
+
 
   show4theatre(theatre: ITheatre) {
     if ( this.shows === [] ) {
       return [];
     }
-    return this.shows.filter( s => {
-      return (s.theatre === theatre);
-    });
+    return this.shows.filter( s => s.theatre.id === theatre.id);
   }
 
 }

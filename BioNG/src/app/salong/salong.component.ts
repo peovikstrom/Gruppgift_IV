@@ -29,6 +29,13 @@ export class SalongComponent implements OnInit {
     return this._dataService.getCachedTheatres()[this.getID()];
   }
 
+
+  // show4theatre(theatre: ITheatre) {
+  myShows() {
+    return this._dataService.show4theatre(this.myTheatre());
+  }
+
+
   getID() {
     return parseInt(this._route.snapshot.paramMap.get('id'), 10);
   }
