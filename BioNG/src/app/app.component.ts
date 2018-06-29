@@ -3,6 +3,7 @@ import { DataService } from './data.service';
 import { ITheatre } from './itheatre';
 import { Router } from '@angular/router';
 
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +30,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
 
-    this._dataService.cacheData();
+    // Keep the cashed data synchronized with the DB and other clients
+    interval(1000).subscribe( x => {
+      this._dataService.cacheData();
+    });
 
     this._dataService.getAllTheatres().subscribe(t => {
       this.theatres = t;

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { IMovie } from './imovie';
 import { IShow } from './ishow';
 import { ITicket } from './iticket';
-import { IGreyTicket } from './igreyticket';
+import { ITicketSTUB } from './iticketstub';
 import { ITheatre } from './itheatre';
 import { tick } from '../../node_modules/@angular/core/testing';
 

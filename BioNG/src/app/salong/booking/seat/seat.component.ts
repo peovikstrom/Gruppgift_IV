@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, IterableDiffers } from '@angular/core';
 import { DataService } from '../../../data.service';
 import { IShow } from '../../../ishow';
+import { interval } from 'rxjs';
 
 import { IMovie } from '../../../imovie';
 import { ITicket } from '../../../iticket';
 import { ITheatre } from '../../../itheatre';
-import { IGreyTicket } from '../../../igreyticket';
+import { ITicketSTUB } from '../../../igreyticket';
 
 @Component({
   selector: 'app-seat',
@@ -47,22 +48,21 @@ export class SeatComponent implements OnInit {
   }
 
   dbBook() {
-    const t: IGreyTicket = <IGreyTicket>{};
+    const t: ITicketSTUB = <ITicketSTUB>{};
 
     t.seatcol = this.colx; // WTF TODO FIX THIS
     t.seatrow = this.coly;
     t.showid = this.show.id;
 
     this._dataService.postTicket(t).subscribe( ret => {
-      console.log('Ticket registered');
-      this._dataService.cacheData();
-      this.updateColor();
+      console.log('Ticket registered :' + ret);
     });
-
     console.log('book x:' + this.colx + ' y:' + this.coly );
   }
 
   ngOnInit() {
-    // this.updateColor();
+    interval(250).subscribe( x => {
+      this.updateColor();
+    });
   }
 }
