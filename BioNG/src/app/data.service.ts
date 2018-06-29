@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { IMovie } from './imovie';
 import { IShow } from './ishow';
 import { ITicket } from './iticket';
+import { IGreyTicket } from './igreyticket';
 import { ITheatre } from './itheatre';
 import { tick } from '../../node_modules/@angular/core/testing';
 
@@ -52,8 +53,9 @@ export class DataService {
     return this._http.post<string>('http://localhost:8080/api/postshow', show, this.httpOptions);
   }
 
-  postTicket(ticket: ITicket) {
-    this.tickets.push(ticket);
+  postTicket(ticket: IGreyTicket) {
+    // this.tickets.push(ticket);
+    console.log(ticket);
     return this._http.post<string>('http://localhost:8080/api/postticket', ticket, this.httpOptions);
   }
 

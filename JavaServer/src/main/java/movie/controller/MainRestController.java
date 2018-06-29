@@ -24,7 +24,7 @@ import movie.entity.Ticket;
 @CrossOrigin
 @RequestMapping({"/api"})
 public class MainRestController {
-
+	
 	public MainRestController() {
 		// TODO Auto-generated constructor stub
 	}
@@ -91,12 +91,24 @@ public class MainRestController {
 	}
 	
 	@PostMapping(value = "/postticket")
-	public String postticket(@RequestBody Ticket ticket){
+	public String postticket(@RequestBody GreyTicket ticket){
 		
 		System.out.println("POST");
-		System.out.println(ticket);
 		
-		return "{\"ret\": \"SHOW THROWN\"}";
+		System.out.println(ticket.showid);
+		System.out.println(ticket.seatcol);
+		System.out.println(ticket.seatrow);
+		
+		Ticket t = new Ticket();
+		t.setSeatCol(ticket.seatcol);
+		t.setSeatRow(ticket.seatrow);
+		t.setShow( showRepository.findById(ticket.showid));
+		
+		ticketRepository.save(t);
+		
+		
+		return "OK";
+		//return "{\"ret\": \"SHOW THROWN\"}";
 	}
 
 

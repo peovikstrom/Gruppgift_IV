@@ -5,6 +5,7 @@ import { IShow } from '../../../ishow';
 import { IMovie } from '../../../imovie';
 import { ITicket } from '../../../iticket';
 import { ITheatre } from '../../../itheatre';
+import { IGreyTicket } from '../../../igreyticket';
 
 @Component({
   selector: 'app-seat',
@@ -46,11 +47,11 @@ export class SeatComponent implements OnInit {
   }
 
   dbBook() {
-    const t: ITicket = <ITicket>{};
+    const t: IGreyTicket = <IGreyTicket>{};
 
     t.seatcol = this.colx; // WTF TODO FIX THIS
     t.seatrow = this.coly;
-    t.show = this.show;
+    t.showid = this.show.id;
 
     this._dataService.postTicket(t).subscribe( ret => {
       console.log('Ticket registered');
