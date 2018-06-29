@@ -1,3 +1,33 @@
-<p>
-  create works!
-</p>
+
+<h2>Add Show</h2>
+<div class="row">
+
+  <div class="col-md-5 mb-3">
+    <div>
+      <form method="POST" (submit)="addShow()" class="form-group">
+
+        Movie
+        <select [(ngModel)]="movie" name="imovie" class="custom-select d-block col-md-6 mb-3" required>
+          <option [ngValue]="movie.id" *ngFor="let movie of myMovies()">
+            {{movie.title}}
+          </option>
+        </select>
+
+        Theatre
+        <select [(ngModel)]="theatreId" name="theatre" class="custom-select d-block col-md-6 mb-3" required>
+          <option [ngValue]="theatre.id" *ngFor="let theatre of myTheatres()">
+            {{theatre.name}}
+          </option>
+        </select>
+
+        Start
+        <input [(ngModel)]="start" type="datetime-local" name="start" class="form-control col-md-6 mb-3" required>
+
+        Stop
+        <input [(ngModel)]="stop" type="datetime-local" name="stop" class="form-control col-md-6 mb-3" required>
+
+        <input type="submit" value="Submit" class="btn btn-primary btn-block col-md-3 mb-3">
+      </form>
+    </div>
+  </div>
+</div>
