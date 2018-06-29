@@ -44,9 +44,9 @@ public class MainRestController {
 	@GetMapping(value = "/test1")
 	public Ticket indexPageTest(Map<String, Object> model) {
 		
-		Show test = showRepository.findById(1);
-		Movie testmov = movieRepository.findById(1);
-		Theatre theatre = theatreRepository.findById(1);
+		// Show test = showRepository.findById(1);
+		// Movie testmov = movieRepository.findById(1);
+		// Theatre theatre = theatreRepository.findById(1);
 		Ticket ticktest = ticketRepository.findById(2);
 		
 		return ticktest;
@@ -91,7 +91,7 @@ public class MainRestController {
 	}
 	
 	@PostMapping(value = "/postticket")
-	public String postticket(@RequestBody GreyTicket ticket){
+	public String postticket(@RequestBody TicketStub ticket){
 		
 		System.out.println("POST");
 		
