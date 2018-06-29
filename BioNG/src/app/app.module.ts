@@ -10,6 +10,7 @@ import { DataService } from './data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BookingComponent } from './salong/booking/booking.component';
 import { SeatComponent } from './salong/booking/seat/seat.component';
+import { CreateComponent } from './show/create/create.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { SeatComponent } from './salong/booking/seat/seat.component';
     AppComponent,
     routingComponents,
     BookingComponent,
-    SeatComponent
+    SeatComponent,
+    CreateComponent
   ],
   imports: [
     BrowserModule,
