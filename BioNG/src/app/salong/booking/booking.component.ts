@@ -10,7 +10,16 @@ export class BookingComponent implements OnInit {
 
   @Input() show: IShow;
 
+  tags = [];
+
   constructor() { }
+
+  doTags(x, y) {
+    this.tags = [{
+      x: x,
+      y: y
+    }];
+  }
 
   xrange(cnt): number[] {
     const a = [];

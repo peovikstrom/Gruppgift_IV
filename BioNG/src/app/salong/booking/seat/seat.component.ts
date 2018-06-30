@@ -28,6 +28,7 @@ export class SeatComponent implements OnInit {
   @Input() colx: number;
   @Input() coly: number;
   @Input() show: IShow;
+  @Input() tags;
 
   constructor(
     private _dataService: DataService
@@ -39,6 +40,7 @@ export class SeatComponent implements OnInit {
   }
 
   updateColor() {
+
     let t4s = this._dataService.tickets4show(this.show);
     t4s = t4s.filter( t => t.seatcol === this.colx && t.seatrow === this.coly);
     if ( t4s.length !== 0 ) {
@@ -46,6 +48,14 @@ export class SeatComponent implements OnInit {
     } else {
       this.status = this.base + this.greenSeat;
     }
+
+    // Make "tagged" cells blue
+    const tagme = this.tags.filter( tag => tag.x === this.colx && tag.y === this.coly );
+
+    if ( tagme.length !== 0 ) {
+      this.status = this.base + this.blueSeat;
+    }
+
   }
 
   dbBook() {

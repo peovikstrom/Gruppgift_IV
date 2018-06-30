@@ -1,11 +1,11 @@
 <div class="booking">
-<table>
-  <div *ngFor="let col of xrange(10)"> 
-      <tr>
-      <td *ngFor="let row of xrange(10)">
-          <app-seat [colx]="row" [coly]="col" [show]="show"> </app-seat>
-      </td> 
-    </tr>
-  </div>
-</table>
+    <table>
+        <div *ngFor="let row of xrange(10)">
+            <tr>
+                <td *ngFor="let col of xrange(10)">
+                    <app-seat (mouseover)="doTags(col, row)" [colx]="col" [coly]="row" [show]="show " [tags]="tags "> </app-seat>
+                </td>
+            </tr>
+        </div>
+    </table>
 </div>
