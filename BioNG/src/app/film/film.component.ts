@@ -31,8 +31,7 @@ export class FilmComponent implements OnInit {
   postIT() {
     this._dataService.postMovie( this.testmov )
       .subscribe( (data: any) => {
-        this.postResponse = data.ret;
-        console.log(data);
+        this._dataService.pushGlobMovie(data);
       });
   }
 

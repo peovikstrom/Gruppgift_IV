@@ -28,29 +28,46 @@ export class DataService {
   constructor(private _http: HttpClient) {
     this.baseUrl = 'http://localhost:8080/api/';
   }
+
+
+  // ------------- Movies
+  // Update the local movie array
+  pushGlobMovie(movies: IMovie[]) {
+    this.movies = movies;
+  }
   getCachedMovies(): IMovie[] { return this.movies; }
   getAllMovies(): Observable<IMovie[]> {
     return this._http.get<IMovie[]>('http://localhost:8080/api/allmovies');
+  }
+
+  // Update the remove movie db from local
+  postMovie(movie: IMovie) {
+    return this._http.post<string>('http://localhost:8080/api/postmovie', movie, this.httpOptions);
+  }
+
+
+  // ------------- Shows
+  // Update the local movie array
+  pushGlobShows(shows: IShow[]) {
+    this.shows = shows;
   }
   getCachedShows(): IShow[] { return this.shows; }
   getAllShows(): Observable<IShow[]> {
     return this._http.get<IShow[]>('http://localhost:8080/api/allshows');
   }
+  postShow(show: IShow) {
+    return this._http.post<string>('http://localhost:8080/api/postshow', show, this.httpOptions);
+  }
+
+
+  // ------------- Tickets
+  // Update the local ticket array
+  pushGlobTickets(tickets: ITicket[]) {
+    this.tickets = tickets;
+  }
   getCachedTickets(): ITicket[] { return this.tickets; }
   getAllTickets(): Observable<ITicket[]> {
     return this._http.get<ITicket[]>('http://localhost:8080/api/alltickets');
-  }
-  getCachedTheatres(): ITheatre[] { return this.theatres; }
-  getAllTheatres(): Observable<ITheatre[]> {
-    return this._http.get<ITheatre[]>('http://localhost:8080/api/alltheatre');
-  }
-
-  postMovie(movie: IMovie) {
-    return this._http.post<string>('http://localhost:8080/api/postmovie', movie, this.httpOptions);
-  }
-
-  postShow(show: IShow) {
-    return this._http.post<string>('http://localhost:8080/api/postshow', show, this.httpOptions);
   }
 
   postTicket(ticket: ITicket) {
@@ -62,10 +79,11 @@ export class DataService {
     stubTicket.seatrow = ticket.seatrow;
     stubTicket.showid = ticket.show.id;
 
-    this.tickets.push(ticket);
+    // Causes concurency issues
+    // this.tickets.push(ticket);
 
     console.log(ticket);
-    return this._http.post<string>('http://localhost:8080/api/postticket', stubTicket, this.httpOptions);
+    return this._http.post<ITicket[]>('http://localhost:8080/api/postticket', stubTicket, this.httpOptions);
   }
 
   postUnTicket(ticket: ITicket) {
@@ -77,10 +95,18 @@ export class DataService {
     stubTicket.seatrow = ticket.seatrow;
     stubTicket.showid = ticket.show.id;
 
-    this.tickets = this.tickets.filter( tr => tr.id !== ticket.id );
+    // Causes concurency issues
+    // this.tickets = this.tickets.filter( tr => tr.id !== ticket.id );
 
     console.log(ticket);
-    return this._http.post<string>('http://localhost:8080/api/postunticket', stubTicket, this.httpOptions);
+    return this._http.post<ITicket[]>('http://localhost:8080/api/postunticket', stubTicket, this.httpOptions);
+  }
+
+
+  // ------------- Theatres / Salongs
+  getCachedTheatres(): ITheatre[] { return this.theatres; }
+  getAllTheatres(): Observable<ITheatre[]> {
+    return this._http.get<ITheatre[]>('http://localhost:8080/api/alltheatre');
   }
 
 

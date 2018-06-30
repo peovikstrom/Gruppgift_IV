@@ -91,25 +91,27 @@ public class MainRestController {
 	}
 	
 	@PostMapping(value = "/postticket")
-	public Ticket postTicket(@RequestBody TicketStub ticket){
+	public List<Ticket> postTicket(@RequestBody TicketStub ticket){
 		
 		Ticket t = new Ticket();
 		t.setSeatCol(ticket.seatcol);
 		t.setSeatRow(ticket.seatrow);
 		t.setShow( showRepository.findById(ticket.showid));
 		
-		return ticketRepository.save(t);
+		ticketRepository.save(t);
+		
+		return ticketRepository.findAll();
 		
 	}
 
 	@PostMapping(value = "/postunticket")
-	public void postUnTicket(@RequestBody TicketStub ticket){
+	public List<Ticket> postUnTicket(@RequestBody TicketStub ticket){
 		
 		System.out.println("POST");
 		
 		ticketRepository.deleteById(ticket.ticketid);
 		
-		return; 
+		return ticketRepository.findAll(); 
 	}
 
 

@@ -61,7 +61,8 @@ export class SeatComponent implements OnInit {
     if ( t4s.length === 0 ) {
 
       this._dataService.postTicket(t).subscribe( ret => {
-        console.log('Ticket registered :' + ret);
+        this._dataService.pushGlobTickets(ret);
+        this.checkStatus(); // We got new tickets update colors
       });
 
     } else {
@@ -69,7 +70,8 @@ export class SeatComponent implements OnInit {
       t.id = t4s[0].id;
 
       this._dataService.postUnTicket(t).subscribe( ret => {
-        console.log('Ticket unRegistered :' + ret);
+        this._dataService.pushGlobTickets(ret);
+        this.checkStatus(); // We got new tickets update colors
       });
 
     }
