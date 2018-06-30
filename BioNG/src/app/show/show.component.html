@@ -1,9 +1,21 @@
 <p>
-  The show must go on!!
+    The show must go on!!
 </p>
+
+<ul>
+    <li class="nav-item dropdown col-md-2 bg-dark text-light" ngbDropdown>
+        <a class="nav-link dropdown-toggle" id="dropdown01" ngbDropdownToggle>Category</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01" ngbDropdownMenu>
+            <a class="dropdown-item" href="#">Angular</a>
+            <a class="dropdown-item" href="#">React</a>
+            <a class="dropdown-item" href="#">Vue.js</a>
+        </div>
+    </li>
+</ul>
 
 <!--
 shows: {{shows[0].showId}}
 -->
 test: {{ jsonTest }}
+
 <app-create></app-create>
