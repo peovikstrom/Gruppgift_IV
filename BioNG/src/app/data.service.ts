@@ -70,36 +70,46 @@ export class DataService {
     return this._http.get<ITicket[]>('http://localhost:8080/api/alltickets');
   }
 
-  postTicket(ticket: ITicket) {
+  postTicket(tickets: ITicket[]) {
 
+    const tstubs = [];
+
+    for (let t of tickets ) {
     const stubTicket = <ITicketSTUB>{};
+      stubTicket.ticketid = t.id;
+      stubTicket.seatcol = t.seatcol;
+      stubTicket.seatrow = t.seatrow;
+      stubTicket.showid = t.show.id;
 
-    stubTicket.ticketid = ticket.id;
-    stubTicket.seatcol = ticket.seatcol;
-    stubTicket.seatrow = ticket.seatrow;
-    stubTicket.showid = ticket.show.id;
+      tstubs.push(stubTicket);
+    }
 
     // Causes concurency issues
     // this.tickets.push(ticket);
 
-    console.log(ticket);
-    return this._http.post<ITicket[]>('http://localhost:8080/api/postticket', stubTicket, this.httpOptions);
+    console.log(tstubs);
+    return this._http.post<ITicket[]>('http://localhost:8080/api/postticket', tstubs, this.httpOptions);
   }
 
-  postUnTicket(ticket: ITicket) {
+  postUnTicket(tickets: ITicket[]) {
 
+    const tstubs = [];
+
+    for (let t of tickets ) {
     const stubTicket = <ITicketSTUB>{};
+      stubTicket.ticketid = t.id;
+      stubTicket.seatcol = t.seatcol;
+      stubTicket.seatrow = t.seatrow;
+      stubTicket.showid = t.show.id;
 
-    stubTicket.ticketid = ticket.id;
-    stubTicket.seatcol = ticket.seatcol;
-    stubTicket.seatrow = ticket.seatrow;
-    stubTicket.showid = ticket.show.id;
+      tstubs.push(stubTicket);
+  }
 
     // Causes concurency issues
     // this.tickets = this.tickets.filter( tr => tr.id !== ticket.id );
 
-    console.log(ticket);
-    return this._http.post<ITicket[]>('http://localhost:8080/api/postunticket', stubTicket, this.httpOptions);
+    console.log(tstubs);
+    return this._http.post<ITicket[]>('http://localhost:8080/api/postunticket', tstubs, this.httpOptions);
   }
 
 

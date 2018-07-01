@@ -45,7 +45,7 @@ export class BookingComponent implements OnInit {
 
     if ( t4s.length === 0 ) {
 
-      this._dataService.postTicket(t).subscribe( ret => {
+      this._dataService.postTicket([t]).subscribe( ret => {
         this._dataService.pushGlobTickets(ret);
         // this.checkStatus(); // We got new tickets update colors
       });
@@ -54,7 +54,7 @@ export class BookingComponent implements OnInit {
 
       t.id = t4s[0].id;
 
-      this._dataService.postUnTicket(t).subscribe( ret => {
+      this._dataService.postUnTicket([t]).subscribe( ret => {
         this._dataService.pushGlobTickets(ret);
         // this.checkStatus(); // We got new tickets update colors
       });
