@@ -74,9 +74,9 @@ export class DataService {
 
     const tstubs = [];
 
-    for (let t of tickets ) {
+    for (const t of tickets ) {
     const stubTicket = <ITicketSTUB>{};
-      stubTicket.ticketid = t.id;
+      // stubTicket.ticketid = t.id;
       stubTicket.seatcol = t.seatcol;
       stubTicket.seatrow = t.seatrow;
       stubTicket.showid = t.show.id;
@@ -87,7 +87,6 @@ export class DataService {
     // Causes concurency issues
     // this.tickets.push(ticket);
 
-    console.log(tstubs);
     return this._http.post<ITicket[]>('http://localhost:8080/api/postticket', tstubs, this.httpOptions);
   }
 
@@ -95,7 +94,7 @@ export class DataService {
 
     const tstubs = [];
 
-    for (let t of tickets ) {
+    for (const t of tickets ) {
     const stubTicket = <ITicketSTUB>{};
       stubTicket.ticketid = t.id;
       stubTicket.seatcol = t.seatcol;
@@ -108,7 +107,6 @@ export class DataService {
     // Causes concurency issues
     // this.tickets = this.tickets.filter( tr => tr.id !== ticket.id );
 
-    console.log(tstubs);
     return this._http.post<ITicket[]>('http://localhost:8080/api/postunticket', tstubs, this.httpOptions);
   }
 

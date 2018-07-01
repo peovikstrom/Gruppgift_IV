@@ -4,7 +4,6 @@ import { IShow } from '../../../ishow';
 import { interval } from 'rxjs';
 
 import { IMovie } from '../../../imovie';
-import { ITicket } from '../../../iticket';
 import { ITheatre } from '../../../itheatre';
 import { ITicketSTUB } from '../../../iticketstub';
 
