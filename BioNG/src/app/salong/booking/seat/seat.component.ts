@@ -11,7 +11,7 @@ import { ITicketSTUB } from '../../../iticketstub';
 @Component({
   selector: 'app-seat',
   template: `
-    <img height="10px" width="20px" src="{{checkStatus()}}" (click)="dbBook()">
+    <img height="10px" width="20px" src="{{checkStatus()}}">
    `,
   styleUrls: ['./seat.component.css']
 })
@@ -56,37 +56,6 @@ export class SeatComponent implements OnInit {
       this.status = this.base + this.blueSeat;
     }
 
-  }
-
-  dbBook() {
-    const t: ITicket = <ITicket>{}; // A Cheat ticket
-
-    let t4s = this._dataService.tickets4show(this.show);
-    t4s = t4s.filter( ts => ts.seatcol === this.colx && ts.seatrow === this.coly);
-
-    t.seatcol = this.colx; // WTF TODO FIX THIS
-    t.seatrow = this.coly;
-    t.show = this.show;
-
-    if ( t4s.length === 0 ) {
-
-      this._dataService.postTicket(t).subscribe( ret => {
-        this._dataService.pushGlobTickets(ret);
-        this.checkStatus(); // We got new tickets update colors
-      });
-
-    } else {
-
-      t.id = t4s[0].id;
-
-      this._dataService.postUnTicket(t).subscribe( ret => {
-        this._dataService.pushGlobTickets(ret);
-        this.checkStatus(); // We got new tickets update colors
-      });
-
-    }
-
-    console.log('book x:' + this.colx + ' y:' + this.coly );
   }
 
   ngOnInit() {

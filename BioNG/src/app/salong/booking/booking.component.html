@@ -3,7 +3,7 @@
         <div *ngFor="let row of xrange(10)">
             <tr>
                 <td *ngFor="let col of xrange(10)">
-                    <app-seat (mouseover)="doTags(col, row)" [colx]="col" [coly]="row" [show]="show " [tags]="tags "> </app-seat>
+                    <app-seat (mouseover)="doTags(col, row)" [colx]="col" [coly]="row" [show]="show" [tags]="tags" (click)="dbBook(col,row)"></app-seat>
                 </td>
             </tr>
         </div>
